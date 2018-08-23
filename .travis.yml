@@ -7,12 +7,16 @@ env:
 
 jobs:
   include:
-    - stage: test
+    - stage: Test Site
       script:
         - bundle exec jekyll build
         - travis_retry bundle exec htmlproofer ./_site
-    - stage: dns
+    - stage: Test DNS
       script:
         - travis_retry bundle exec github-pages health-check
+    - stage: Test Gems
+      script:
+        - bundle update github-pages
+        - git diff-files --quiet
 
-cache: bundler
+cache: bundler  
