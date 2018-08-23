@@ -1,0 +1,12 @@
+sudo: false
+language: ruby
+
+env:
+  global:
+    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
+
+script:
+  - bundle exec build
+  - bundle exec htmlproofer ./_site
+
+cache: bundler

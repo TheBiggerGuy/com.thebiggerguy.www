@@ -8,6 +8,19 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
+# Setting enforced by GitHub Pages
+lsi: false
+safe: true
+#source: [your repo's top level directory]
+incremental: false
+highlighter: rouge
+gist:
+  noscript: false
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
+
 # Site settings
 # These are used to personalize your new site. If you look in the HTML files,
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
@@ -16,16 +29,13 @@
 title: Guy Taylor
 email: web@thebiggerguy.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  The main home for TheBiggerGuy aka Guy Taylor.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.thebiggerguy.com/" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  thebiggerguy
+twitter_username: TheBiggerGuy
+github_username:  TheBiggerGuy
 
 # Build settings
-markdown: kramdown
 theme: minima
 plugins:
   - jekyll-feed
@@ -33,11 +43,13 @@ plugins:
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .travis.yml
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
