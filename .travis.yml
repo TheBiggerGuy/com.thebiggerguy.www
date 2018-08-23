@@ -5,6 +5,10 @@ env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
 
+before_install:
+  - gem update --system
+  - gem --version
+
 jobs:
   include:
     - stage: Test Site
@@ -19,4 +23,6 @@ jobs:
         - bundle update github-pages
         - git diff-files --quiet
 
-cache: bundler  
+cache:
+  - .bundle
+  - vendor/bundle
