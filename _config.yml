@@ -34,11 +34,25 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://www.thebiggerguy.com/" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: TheBiggerGuy
 github_username:  TheBiggerGuy
+author: Guy Taylor
+# logo: /assets/your-company-logo.png
+social:
+  name: Guy Taylor
+  links:
+    - https://twitter.com/TheBiggerGuy
+    - https://github.com/TheBiggerGuy
+    - https://keybase.io/TheBiggerGuy
+    - https://www.linkedin.com/in/Guy-Taylor
+lang: en_GB
+twitter:
+  username: TheBiggerGuy
+  card: summary
 
 # Build settings
 theme: minima
 plugins:
-  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
