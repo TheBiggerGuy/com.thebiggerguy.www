@@ -1,0 +1,13 @@
+baseURL = "https://wwww.thebiggerguy.com/"
+languageCode = "en-gb"
+
+title = "TheBiggerGuy | The Home of Guy Taylor"
+theme = "jeffprod"
+
+#
+#[permalinks]
+#    post = "/:year/:filename"
+#
+#[taxonomies]
+#    tag = "tags"
+#    archive = "archives"

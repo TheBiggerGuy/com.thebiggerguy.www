@@ -1,28 +1,38 @@
-sudo: false
-language: ruby
+sudo: required
+dist: trusty
+language: generic
+
+services:
+  - docker
 
 env:
   global:
-    - NOKOGIRI_USE_SYSTEM_LIBRARIES=true # speeds up installation of html-proofer
+    - HUGO_VERSION=0.47.1
+    - HUGO_HASH=9215460d8eb55f57df0458d7d278b08f19922fd5f9dbe70e1461f338f2b0fc35
 
 before_install:
-  - gem update --system
-  - gem --version
+  # Set to fail on errors
+  - set -o errexit && set -o pipefail
+  # Check for correct libstdc++
+  - docker build --tag hugo --build-arg=HUGO_VERSION --build-arg=HUGO_HASH  .travis
+  # Reset shell
+  - set +o errexit && set +o pipefail
 
 jobs:
   include:
-    - stage: Test Site
+    - stage: Test
       script:
-        - bundle exec jekyll build
-        - bundle exec htmlproofer ./_site --disable-external
-    - stage: Test DNS
+        - docker run -v "${PWD}/site:/site" hugo
+    - stage: Deploy
+      if: branch = master
       script:
-        - travis_retry bundle exec github-pages health-check
-    - stage: Test Gems
-      script:
-        - bundle update github-pages
-        - git diff-files --quiet
-
-cache:
-  - .bundle
-  - vendor/bundle
+        - docker run -v "${PWD}/site:/site" hugo
+        - sudo chown -R travis:travis site/public
+      deploy:
+        provider: pages
+        github-token: ${GITHUB_TOKEN}
+        skip-cleanup: true
+        keep-history: true
+        local-dir: site/public
+        target-branch: gh-pages
+        fqdn: www.thebiggerguy.com
