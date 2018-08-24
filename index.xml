@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TheBiggerGuy | The Home of Guy Taylor</title>
+    <link>https://wwww.thebiggerguy.com/</link>
+    <description>Recent content on TheBiggerGuy | The Home of Guy Taylor</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 24 Aug 2018 17:09:43 +0100</lastBuildDate>
+    
+	<atom:link href="https://wwww.thebiggerguy.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About Guy</title>
+      <link>https://wwww.thebiggerguy.com/about/</link>
+      <pubDate>Fri, 24 Aug 2018 17:09:43 +0100</pubDate>
+      
+      <guid>https://wwww.thebiggerguy.com/about/</guid>
+      <description>Guy Taylor is a Software Eng working in Edinburgh. TheBiggerGuy</description>
+    </item>
+    
+  </channel>
+</rss>
