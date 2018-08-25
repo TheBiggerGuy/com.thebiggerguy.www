@@ -3,8 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://wwww.thebiggerguy.com/</loc>
+    <lastmod>2018-08-24T19:32:49+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://wwww.thebiggerguy.com/about/</loc>
-    <lastmod>2018-08-24T17:09:43+01:00</lastmod>
+    <lastmod>2018-08-25T16:21:15+01:00</lastmod>
   </url>
   
   <url>
@@ -14,12 +19,6 @@
   
   <url>
     <loc>https://wwww.thebiggerguy.com/tags/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://wwww.thebiggerguy.com/</loc>
-    <lastmod>2018-08-24T17:09:43+01:00</lastmod>
     <priority>0</priority>
   </url>
   
