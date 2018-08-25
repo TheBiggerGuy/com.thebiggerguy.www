@@ -21,14 +21,20 @@
 </head>
 
 <body>
+    {{ "<!-- Start header -->" | safeHTML }}
     {{ partial "header.html" . }}
+    {{ "<!-- End header -->" | safeHTML }}
 
     <main role="main">
 
-        {{ block "jumbotron" . }}{{ end }}
+        {{ "<!-- Start hero -->" | safeHTML }}
+        {{ block "hero" . }}{{ end }}
+        {{ "<!-- end hero -->" | safeHTML }}
 
         <div class="container">
+            {{ "<!-- Start main -->" | safeHTML }}
             {{- block "main" . }}{{- end }}
+            {{ "<!-- End main -->" | safeHTML }}
         </div>
 
     </main>

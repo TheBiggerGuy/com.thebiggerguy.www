@@ -1,20 +1,5 @@
-{{ define "jumbotron" }}
-<!-- Main jumbotron for a primary marketing message or call to action -->
-
-{{ $hero_image := .Resources.GetMatch "index_hero.jpg" }}
-{{ $hero_image_small := $hero_image.Resize "x500" }}
-
-<div class="carousel slide">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100" src="{{ $hero_image_small.Permalink }}">
-      <div class="carousel-caption d-none d-md-block">
-            <h1 class="display-3">{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}</h1>
-            <p class="lead">{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.SiteDescription }}{{ end }}</p>
-      </div>
-    </div>
-  </div>
-</div>
+{{ define "hero" }}
+{{ partial "hero.html" . }}
 {{ end }}
 
 {{ define "main" }}
