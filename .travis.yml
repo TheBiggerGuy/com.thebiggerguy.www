@@ -33,11 +33,19 @@ jobs:
         - docker run -v "${PWD}:/repo" hugo
         - sudo chown -R travis:travis site/public
         - touch site/public/.nojekyll
+      before_deploy:
+        - tar -czvf public.tar.gz site/public
       deploy:
-        provider: pages
-        github-token: ${GITHUB_TOKEN}
-        skip-cleanup: true
-        keep-history: true
-        local-dir: site/public
-        target-branch: gh-pages
-        fqdn: www.thebiggerguy.com
+        # Hosted GitHub Pages site
+        - provider: pages
+          github-token: ${GITHUB_TOKEN}
+          skip-cleanup: true
+          keep-history: true
+          local-dir: site/public
+          target-branch: gh-pages
+          fqdn: www.thebiggerguy.com
+
+        # Record of the public site
+        - provider: releases
+          api_key: ${GITHUB_TOKEN}
+          file: public.tar.gz
