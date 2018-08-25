@@ -2,7 +2,7 @@
 baseURL = "https://wwww.thebiggerguy.com/"
 languageCode = "en-gb"
 
-title = "TheBiggerGuy | The Home of Guy Taylor"
+title = "TheBiggerGuy | Guy Taylor"
 author = "Guy Taylor"
 copyright = "Guy Taylor"
 theme = ""
@@ -11,14 +11,6 @@ theme = ""
 enableGitInfo = true
 
 sectionPagesMenu = "main"
-
-#
-#[permalinks]
-#    post = "/:year/:filename"
-#
-#[taxonomies]
-#    tag = "tags"
-#    archive = "archives"
 
 [params]
     # The path must be relative to the static folder 

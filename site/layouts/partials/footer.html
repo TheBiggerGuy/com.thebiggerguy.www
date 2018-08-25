@@ -1,3 +1,16 @@
-<footer class="container">
-    <p>Copyright &copy; {{ .Site.Copyright }} {{ now.Format "2018" }}</p>
+<footer class="container-fluid bg-dark text-center pt-3">
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <ul class="list-unstyled list-inline">
+                <a href="https://twitter.com/TheBiggerGuy" class="text-muted"><span class="fab fa-twitter fa-3x px-2"></span></a>
+                <a href="https://github.com/TheBiggerGuy" class="text-muted"><span class="fab fa-github fa-3x px-2"></span></a>
+                <a href="https://www.linkedin.com/in/Guy-Taylor" class="text-muted"><span class="fab fa-linkedin fa-3x px-2"></span></a>
+            </ul>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <p class="text-muted">Copyright &copy; {{ .Site.Copyright }} {{ now.Format "2018" }}</p>
+        </div>
+    </div>
 </footer>
