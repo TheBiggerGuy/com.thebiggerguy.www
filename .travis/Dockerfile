@@ -1,5 +1,10 @@
 FROM debian:buster-slim as base
 
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 FROM base as builder
 
 ARG HUGO_VERSION
@@ -16,4 +21,4 @@ RUN tar -xvf 'hugo_extended_Linux-64bit.tar.gz' 'hugo'
 FROM base
 
 COPY --from=builder hugo /usr/local/bin/hugo
-CMD ["hugo", "-s", "/site"]
+CMD ["hugo", "-s", "/repo/site"]
