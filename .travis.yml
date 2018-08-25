@@ -44,8 +44,10 @@ jobs:
           local-dir: site/public
           target-branch: gh-pages
           fqdn: www.thebiggerguy.com
+          skip_cleanup: true
 
         # Record of the public site
         - provider: releases
           api_key: ${GITHUB_TOKEN}
           file: public.tar.gz
+          skip_cleanup: true
