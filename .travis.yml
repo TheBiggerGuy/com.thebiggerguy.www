@@ -13,7 +13,7 @@ env:
 before_install:
   # Set to fail on errors
   - set -o errexit && set -o pipefail
-  # Check for correct libstdc++
+  # Build docker container
   - docker build --tag hugo --build-arg=HUGO_VERSION --build-arg=HUGO_HASH  .travis
   # Reset shell
   - set +o errexit && set +o pipefail
@@ -22,11 +22,11 @@ jobs:
   include:
     - stage: Test
       script:
-        - docker run -v "${PWD}/site:/site" hugo
+        - docker run -v "${PWD}:/repo" hugo
     - stage: Deploy
       if: branch = master
       script:
-        - docker run -v "${PWD}/site:/site" hugo
+        - docker run -v "${PWD}:/repo" hugo
         - sudo chown -R travis:travis site/public
       deploy:
         provider: pages

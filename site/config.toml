@@ -1,8 +1,16 @@
+# Site vars (see https://gohugo.io/variables/site/)
 baseURL = "https://wwww.thebiggerguy.com/"
 languageCode = "en-gb"
 
 title = "TheBiggerGuy | The Home of Guy Taylor"
-theme = "jeffprod"
+author = "Guy Taylor"
+copyright = "Guy Taylor"
+theme = ""
+
+# https://gohugo.io/getting-started/configuration/
+enableGitInfo = true
+
+sectionPagesMenu = "main"
 
 #
 #[permalinks]
@@ -11,3 +19,9 @@ theme = "jeffprod"
 #[taxonomies]
 #    tag = "tags"
 #    archive = "archives"
+
+[params]
+    # The path must be relative to the static folder 
+    favicon = "favicon.ico"
+
+    SiteDescription = "The home of Guy Taylor aka TheBiggerGuy. A Software Eng working in Edinburgh."
