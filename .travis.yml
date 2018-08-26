@@ -24,30 +24,37 @@ before_install:
 
 jobs:
   include:
+    # Build site to test it works
     - stage: Test
       script:
         - docker run -v "${PWD}:/repo" hugo
+
+    # Add archive of site to GitHub via releases
+    - stage: Archive
+      if: branch = master
+      script:
+        - docker run -v "${PWD}:/repo" hugo
+        - sudo chown -R travis:travis site/public
+      before_deploy:
+        - tar -czvf public.tar.gz site/public
+      deploy:
+        provider: releases
+        api_key: ${GITHUB_TOKEN}
+        file: public.tar.gz
+        skip_cleanup: true
+
+    # Upload to S3 for public CDN
     - stage: Deploy
       if: branch = master
       script:
         - docker run -v "${PWD}:/repo" hugo
         - sudo chown -R travis:travis site/public
-        - touch site/public/.nojekyll
-      before_deploy:
-        - tar -czvf public.tar.gz site/public
       deploy:
-        # Hosted GitHub Pages site
-        - provider: pages
-          github-token: ${GITHUB_TOKEN}
-          skip-cleanup: true
-          keep-history: true
-          local-dir: site/public
-          target-branch: gh-pages
-          fqdn: www.thebiggerguy.com
-          skip_cleanup: true
-
-        # Record of the public site
-        - provider: releases
-          api_key: ${GITHUB_TOKEN}
-          file: public.tar.gz
-          skip_cleanup: true
+        provider: s3
+        access_key_id: "${AWS_ACCESS_KEY}"
+        secret_access_key: "${AWS_SECRET_KEY}"
+        bucket: "com.thebiggerguy.www"
+        region: eu-west-1
+        acl: private
+        local_dir: site/public
+        skip_cleanup: true
