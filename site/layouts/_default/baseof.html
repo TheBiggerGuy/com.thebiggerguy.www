@@ -23,7 +23,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
     {{ "<!-- Custom styles for this template -->" | safeHTML }}
-    <link href="{{ "css/main.css" | absURL }}" rel="stylesheet">
+    {{ with resources.Get "css/main.css" | resources.Minify | resources.Fingerprint "sha256" }}
+    <link href="{{ .Permalink }}" integrity="{{ .Data.Integrity }}" rel="stylesheet">
+    {{ end }}
 </head>
 
 <body>
@@ -31,7 +33,7 @@
     {{ partial "header.html" . }}
     {{ "<!-- End header -->" | safeHTML }}
 
-    <main role="main">
+    <main role="main" id="main">
 
         {{ "<!-- Start hero -->" | safeHTML }}
         {{ block "hero" . }}{{ end }}
