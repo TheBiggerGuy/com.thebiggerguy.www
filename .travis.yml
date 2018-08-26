@@ -38,12 +38,21 @@ jobs:
       deploy:
         # Hosted GitHub Pages site
         - provider: pages
-          github-token: ${GITHUB_TOKEN}
+          github-token: "${GITHUB_TOKEN}"
           skip-cleanup: true
           keep-history: true
           local-dir: site/public
           target-branch: gh-pages
           fqdn: www.thebiggerguy.com
+          skip_cleanup: true
+
+        - provider: s3
+          access_key_id: "${AWS ACCESS KEY}"
+          secret_access_key: "${AWS_SECRET_KEY}"
+          bucket: "com.thebiggerguy.www"
+          region: eu-west-1
+          acl: private
+          local_dir: site/public
           skip_cleanup: true
 
         # Record of the public site
