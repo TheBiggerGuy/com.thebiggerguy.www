@@ -1,5 +1,5 @@
 # Site vars (see https://gohugo.io/variables/site/)
-baseURL = "https://wwww.thebiggerguy.com/"
+baseURL = "https://www.thebiggerguy.com/"
 languageCode = "en-gb"
 
 title = "TheBiggerGuy | Guy Taylor"
