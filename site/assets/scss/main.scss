@@ -1,0 +1,45 @@
+@import "../../../bootstrap/scss/functions";
+@import "../../../bootstrap/scss/variables";
+@import "../../../bootstrap/scss/mixins";
+
+.hero .row {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.hero h1 {
+  font-size: $display4-size;
+  font-weight: $display4-weight;
+  line-height: $display-line-height;
+  overflow-wrap: break-word;
+}
+
+@include media-breakpoint-up(sm) {
+  .hero h1 {
+    font-size: $display3-size;
+    font-weight: $display3-weight;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .hero h1 {
+    font-size: $display2-size;
+    font-weight: $display2-weight;
+  }
+}
+
+.hero h2 {
+  font-size: $lead-font-size;
+  font-weight: $lead-font-weight;
+}
+
+/* Set default fonts */
+/** {
+    font-family: 'Roboto', sans-serif;
+}*/
+
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+#main {
+  padding-top: 3.5rem;
+}
+

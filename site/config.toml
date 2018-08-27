@@ -2,7 +2,7 @@
 baseURL = "https://www.thebiggerguy.com/"
 languageCode = "en-gb"
 
-title = "TheBiggerGuy | Guy Taylor"
+title = "TheBiggerGuy | Guy&nbsp;Taylor"
 author = "Guy Taylor"
 copyright = "Guy Taylor"
 theme = ""
