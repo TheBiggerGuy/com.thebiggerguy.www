@@ -1,0 +1,27 @@
+{{ define "main" }}
+<main>
+    <article>
+        <header>
+            <h1>{{ .Title }}</h1>
+        </header>
+        {{ .Content }}
+    </article>
+    <!-- Ranges through content/post/*.md -->
+    {{ range $page := .Pages }}
+        {{ $photo := $page.Resources.GetMatch ($page.Params.Photo) }}
+        {{ if ne $photo.ResourceType "image" }}{{ errorf "Image ResourceType not jpg: %s %s" .Path $photo.ResourceType }}{{ end }}
+        {{ $photo_resized := $photo.Fit "250x250" }}
+        <div class="card-group">
+            <div class="card bg-secondary border-dark mb-3">
+                <a href="{{ $page.Permalink }}" class="text-white">
+                    <img class="card-img-top" src="{{ $photo_resized.Permalink }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $page.Title }}</h5>
+                        <p class="card-text">{{ $page.Description }}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    {{ end }}
+</main>
+{{ end }}

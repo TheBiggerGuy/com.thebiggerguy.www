@@ -1,0 +1,16 @@
+{{ define "main" }}
+{{ "<!-- Start photography main -->" | safeHTML }}
+
+{{ $photo := .Resources.GetMatch (.Params.Photo) }}
+{{ if ne $photo.ResourceType "image" }}{{ errorf "Image ResourceType not jpg: %s %s" .Path $photo.ResourceType }}{{ end }}
+{{ $photo_resized := $photo.Fit "1024x500" }}
+
+<h1>{{ .Title }}</h1>
+<div class="mx-auto">
+    <img src="{{ $photo_resized.Permalink }}" alt="{{ .Description }}" class="img-fluid">
+    <p>{{ .Description }}</p>
+</div>
+
+{{ .Content }}
+{{ "<!-- End photography main -->" | safeHTML }}
+{{ end }}
