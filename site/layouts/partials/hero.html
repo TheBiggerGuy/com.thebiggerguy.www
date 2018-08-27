@@ -1,7 +1,7 @@
 {{ $hero_image := .Resources.GetMatch "index_hero.jpg" }}
 {{ $hero_image_small := $hero_image.Resize "x500" }}
 
-<div class="container-fluid px-0 mx-0 hero text-center" style="background-image: url('{{ $hero_image_small.Permalink }}'); background-position: center center; min-height: 500px;">
+<div class="container-fluid px-0 mx-0 hero text-center" style="background-image: url('{{ $hero_image_small.Permalink }}'); background-position: center center; background-repeat: no-repeat; background-size: cover; min-height: 500px;">
     <h1 class="">
         {{ if .Params.HeroTitle }}
             {{ safeHTML .Params.HeroTitle }}
