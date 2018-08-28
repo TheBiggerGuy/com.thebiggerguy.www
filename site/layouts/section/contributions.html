@@ -1,0 +1,35 @@
+{{ define "main" }}
+<header>
+    <h1>{{ .Title }}</h1>
+</header>
+
+<div class="container">
+    {{ .Content }}
+</div>
+
+<!-- Ranges through content/post/*.md -->
+
+<div class="container">
+    <div class="card-columns">
+    {{ range $page := .Pages }}
+            <div class="card bg-secondary border-dark">
+                <a href="{{ $page.Permalink }}" class="text-white">
+                    {{ if $page.Params.LogoIcon }}
+                    <div class="card-img-top text-center pt-3">
+                        <span class="{{ $page.Params.LogoIcon }} fa-8x">
+                    </div>
+                    {{ else }}
+                    <div class="text-center pt-3">
+                        <img class="card-img-top" style="max-height: 128px; max-width: 128px;" src="{{ $page.Params.Logo }}" alt="{{ $page.Title }} Icon">
+                    </div>
+                    {{ end }}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $page.Title }}</h5>
+                        <p class="card-text">{{ $page.Description }}</p>
+                    </div>
+                </a>
+            </div>
+    {{ end }}
+    </div>
+</div>
+{{ end }}

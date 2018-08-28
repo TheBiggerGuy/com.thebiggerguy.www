@@ -1,0 +1,18 @@
+{{ define "main" }}
+{{ "<!-- Start contributions main -->" | safeHTML }}
+
+<h1>{{ .Title }}</h1>
+<div class="mx-auto">
+    {{ if .Params.LogoIcon }}
+    <div class="py-3">
+        <span class="{{ .Params.LogoIcon }} fa-8x">
+    </div>
+    {{ else }}
+    <img class="img-fluid" style="max-height: 128px; max-width: 128px;" src="{{ .Params.Logo }}" alt="{{ .Title }} Icon">
+    {{ end }}
+    <p>{{ .Description }}</p>
+</div>
+
+{{ .Content }}
+{{ "<!-- End contributions main -->" | safeHTML }}
+{{ end }}
