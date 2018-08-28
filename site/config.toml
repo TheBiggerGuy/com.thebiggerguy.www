@@ -9,6 +9,7 @@ theme = ""
 
 # https://gohugo.io/getting-started/configuration/
 enableGitInfo = true
+enableRobotsTXT = true
 
 sectionPagesMenu = "main"
 
