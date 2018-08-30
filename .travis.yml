@@ -11,6 +11,11 @@ branches:
 services:
   - docker
 
+addons:
+  apt:
+    packages:
+      - docker-ce
+
 env:
   global:
     - HUGO_VERSION=0.48
