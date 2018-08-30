@@ -54,8 +54,8 @@ jobs:
         - sudo chown -R travis:travis site/public
       deploy:
         provider: s3
-        access_key_id: "${AWS_ACCESS_KEY}"
-        secret_access_key: "${AWS_SECRET_KEY}"
+        access_key_id: "${AWS_ACCESS_KEY_ID}"
+        secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
         bucket: "com.thebiggerguy.www"
         region: eu-west-1
         acl: private
