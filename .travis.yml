@@ -19,6 +19,7 @@ before_install:
   - set -o errexit && set -o pipefail
   # Build docker container
   - docker build --tag hugo --build-arg=HUGO_VERSION --build-arg=HUGO_HASH  .travis
+  - pip install --user --upgrade pip
   - pip install --user --upgrade awscli
   - export PATH="${HOME}/.local/bin:${PATH}"
   # Reset shell
