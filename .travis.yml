@@ -19,7 +19,8 @@ before_install:
   - set -o errexit && set -o pipefail
   # Build docker container
   - docker build --tag hugo --build-arg=HUGO_VERSION --build-arg=HUGO_HASH  .travis
-  - pip install awscli
+  - pip install --user --upgrade awscli
+  - export PATH="${HOME}/.local/bin:${PATH}"
   # Reset shell
   - set +o errexit && set +o pipefail
 
@@ -61,3 +62,7 @@ jobs:
         skip_cleanup: true
       after_deploy:
         - awd cloudfront create-invalidation --distribution-id "${AWS_CLOUDFRONT_DISTRIBUTION_ID}"
+
+cache:
+  directories:
+    - ${HOME}/.local
