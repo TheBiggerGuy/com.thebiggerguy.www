@@ -19,6 +19,8 @@ sectionPagesMenu = "main"
 
     SiteDescription = "The home of Guy Taylor aka TheBiggerGuy. A Software Eng working in Edinburgh."
 
+    googleMapsApiKey = "AIzaSyDs8gYGyCWfnn1bxWwZqQL3OXgkdRNOnUA"
+
 # Disable all third party for GDPR
 [privacy]
     [privacy.disqus]

@@ -9,6 +9,13 @@
 <div class="mx-auto">
     <img src="{{ $photo_resized.Permalink }}" alt="{{ .Description }}" class="img-fluid">
     <p>{{ .Description }}</p>
+    {{ if and .Site.Params.googleMapsApiKey .Params.location }}
+    <picture>
+        <source srcset="https://maps.googleapis.com/maps/api/staticmap?size=640x200&zoom=4&center={{ .Params.location }}&markers=color:gray|{{ .Params.location }}&key={{ .Site.Params.googleMapsApiKey }}" media="(min-width: 640px)">
+        <source srcset="https://maps.googleapis.com/maps/api/staticmap?size=425x200&zoom=4&center={{ .Params.location }}&markers=color:gray|{{ .Params.location }}&key={{ .Site.Params.googleMapsApiKey }}" media="(min-width: 425px)">
+        <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?size=320x200&zoom=4&center={{ .Params.location }}&markers=color:gray|{{ .Params.location }}&key={{ .Site.Params.googleMapsApiKey }}">
+    </picture>
+    {{ end }}
 </div>
 
 {{ .Content }}
