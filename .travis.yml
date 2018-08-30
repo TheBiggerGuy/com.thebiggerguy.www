@@ -84,7 +84,7 @@ before_cache:
   - echo 'Docker images in cache' && find "${HOME}/docker/" -name '*.tar.gz'
   - >
     docker images --all --filter='dangling=false' --filter='label=cache-travis=true' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
-    | xargs -n 2 -t sh -c 'test -e "${HOME}/docker/${1}.tar.gz" || docker save "${0}" | gzip -2 > "${HOME}/docker/${1}.tar.gz"'
+    | xargs --max-args=2 --verbose sh -c 'test -e "${HOME}/docker/${1}.tar.gz" || docker save "${0}" | gzip -2 > "${HOME}/docker/${1}.tar.gz"'
   # Clean cached Docker files after 30 days
   - find "${HOME}/docker" -type f -mtime +30 -exec rm {} \;
 
