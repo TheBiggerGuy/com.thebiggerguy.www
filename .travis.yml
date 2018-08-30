@@ -11,8 +11,8 @@ services:
 
 env:
   global:
-    - HUGO_VERSION=0.47.1
-    - HUGO_HASH=9215460d8eb55f57df0458d7d278b08f19922fd5f9dbe70e1461f338f2b0fc35
+    - HUGO_VERSION=0.48
+    - HUGO_HASH=9830ee1d51f225beb31ac2855cbc269048e1d3b75f8d5e70afe5eb44ad78f9ad
 
 before_install:
   # Set to fail on errors
