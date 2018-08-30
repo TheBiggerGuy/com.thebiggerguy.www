@@ -1,3 +1,5 @@
+# See https://github.com/JLLeitschuh/shuffleboard/commit/445eabb6234f7973351acfb492123484491e2008 for Docker cache
+
 sudo: required
 dist: trusty
 language: generic
@@ -9,6 +11,11 @@ branches:
 services:
   - docker
 
+addons:
+  apt:
+    packages:
+      - docker-ce
+
 env:
   global:
     - HUGO_VERSION=0.48
@@ -18,7 +25,13 @@ before_install:
   # Set to fail on errors
   - set -o errexit && set -o pipefail
   # Build docker container
-  - docker build --tag hugo --build-arg=HUGO_VERSION --build-arg=HUGO_HASH  .travis
+  - if [[ -d ${HOME}/docker ]]; then
+      find "${HOME}/docker" -name '*.tar.gz' -print0 | xargs -0 --no-run-if-empty -I {file} sh -c "zcat {file} | docker load";
+    fi
+  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --tag hugo-base --target base .travis
+  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --tag hugo-builder --target builder .travis
+  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --tag hugo .travis
+  # Install AWS CLI
   - pip install --user --upgrade pip
   - pip install --user --upgrade awscli
   - export PATH="${HOME}/.local/bin:${PATH}"
@@ -64,6 +77,18 @@ jobs:
       after_deploy:
         - aws cloudfront create-invalidation --distribution-id "${AWS_CLOUDFRONT_DISTRIBUTION_ID}" --paths '/*'
 
+before_cache:
+  # Cache Docker files
+  - mkdir -p "${HOME}/docker"
+  - echo 'Docker images with cache-travis=true' && docker images --all --filter='dangling=false' --filter='label=cache-travis=true' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
+  - echo 'Docker images in cache' && find "${HOME}/docker/" -name '*.tar.gz'
+  - >
+    docker images --all --filter='dangling=false' --filter='label=cache-travis=true' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
+    | xargs --max-args=2 --verbose sh -c 'test -e "${HOME}/docker/${1}.tar.gz" || docker save "${0}" | gzip -2 > "${HOME}/docker/${1}.tar.gz"'
+  # Clean cached Docker files after 30 days
+  - find "${HOME}/docker" -type f -mtime +30 -exec rm {} \;
+
 cache:
   directories:
     - ${HOME}/.local
+    - ${HOME}/docker
