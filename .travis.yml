@@ -21,6 +21,7 @@ before_install:
   - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --tag hugo-base --target base .travis
   - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --tag hugo-builder --target builder .travis
   - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --tag hugo .travis
+  # Install AWS CLI
   - pip install --user --upgrade pip
   - pip install --user --upgrade awscli
   - export PATH="${HOME}/.local/bin:${PATH}"
