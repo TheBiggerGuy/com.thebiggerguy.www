@@ -1,3 +1,5 @@
+# See https://github.com/JLLeitschuh/shuffleboard/commit/445eabb6234f7973351acfb492123484491e2008 for Docker cache
+
 sudo: required
 dist: trusty
 language: generic
@@ -18,6 +20,9 @@ before_install:
   # Set to fail on errors
   - set -o errexit && set -o pipefail
   # Build docker container
+  - if [[ -d ${HOME}/docker ]]; then
+      ls ${HOME}/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load";
+    fi
   - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --tag hugo-base --target base .travis
   - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --tag hugo-builder --target builder .travis
   - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --tag hugo .travis
@@ -67,6 +72,13 @@ jobs:
       after_deploy:
         - awd cloudfront create-invalidation --distribution-id "${AWS_CLOUDFRONT_DISTRIBUTION_ID}"
 
+before_cache:
+  - mkdir -p "${HOME}/docker"
+  - >
+    docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
+    | xargs -n 2 -t sh -c 'test -e "${HOME}/docker/${1}.tar.gz" || docker save "${0}"" | gzip -2 > "${HOME}/docker/${1}.tar.gz"'
+
 cache:
   directories:
     - ${HOME}/.local
+    - ${HOME}/docker
