@@ -10,7 +10,7 @@
 <!-- Ranges through content/post/*.md -->
 
 <div class="container">
-    {{ range (.Pages.GroupByDate "2006").Reverse }}
+    {{ range .Pages.GroupByDate "2006" }}
     <div class="row">
         <h3>{{ .Key }}</h3>
         <div class="card-columns">
