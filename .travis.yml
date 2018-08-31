@@ -27,10 +27,11 @@ before_install:
   # Build docker container
   - if [[ -d ${HOME}/docker ]]; then
       find "${HOME}/docker" -name '*.tar.gz' -print0 | xargs -0 --no-run-if-empty -I {file} sh -c "zcat {file} | docker load";
+      rm -r "${HOME}/docker"
     fi
-  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --tag hugo-base --target base .travis
-  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --tag hugo-builder --target builder .travis
-  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --tag hugo .travis
+  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --cache-from=hugo-base:latest --tag hugo-base --target base .travis
+  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --cache-from=hugo-builder:latest --tag hugo-builder --target builder .travis
+  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --cache-from=hugo:latest --tag hugo .travis
   # Install AWS CLI
   - pip install --user --upgrade pip
   - pip install --user --upgrade awscli
