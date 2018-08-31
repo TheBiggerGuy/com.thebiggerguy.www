@@ -7,6 +7,11 @@ logoicon: "fas fa-plane"
 
 ---
 
-Working on my [docker-ads-b](/projects) project
+Working on my [docker-ads-b](/projects) project I have submitted to other related projects.
 
-https://github.com/vradarserver/vrs/commits?author=TheBiggerGuy
+## Virtual Radar Server
+
+I have submitted patches to enable building the _C#_ project on Linux via Mono.
+
+* Project Homepage: http://www.virtualradarserver.co.uk/
+* Upstream Commits: https://github.com/vradarserver/vrs/commits?author=TheBiggerGuy
