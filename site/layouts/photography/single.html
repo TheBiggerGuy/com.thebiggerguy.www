@@ -3,18 +3,25 @@
 
 {{ $photo := .Resources.GetMatch (.Params.Photo) }}
 {{ if ne $photo.ResourceType "image" }}{{ errorf "Image ResourceType not jpg: %s %s" .Path $photo.ResourceType }}{{ end }}
-{{ $photo_resized := $photo.Fit "1024x500" }}
+{{ $photo_resized_425 := $photo.Fit "425x500" }}
+{{ $photo_resized_1024 := $photo.Fit "1024x500" }}
 
 <h1>{{ .Title }}</h1>
 <div class="mx-auto">
-    <img src="{{ $photo_resized.Permalink }}" alt="{{ .Description }}" class="img-fluid">
-    <p>{{ .Description }}</p>
-    {{ if and .Site.Params.googleMapsApiKey .Params.location }}
     <picture>
-        <source srcset="https://maps.googleapis.com/maps/api/staticmap?size=640x200&zoom=4&center={{ .Params.location }}&markers=color:gray|{{ .Params.location }}&key={{ .Site.Params.googleMapsApiKey }}" media="(min-width: 640px)">
-        <source srcset="https://maps.googleapis.com/maps/api/staticmap?size=425x200&zoom=4&center={{ .Params.location }}&markers=color:gray|{{ .Params.location }}&key={{ .Site.Params.googleMapsApiKey }}" media="(min-width: 425px)">
-        <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?size=320x200&zoom=4&center={{ .Params.location }}&markers=color:gray|{{ .Params.location }}&key={{ .Site.Params.googleMapsApiKey }}">
+        <source srcset="{{ $photo_resized_1024.Permalink }}" media="(min-width: 640px)">
+        <img src="{{ $photo_resized_425.Permalink }}" alt="{{ .Description }}" class="img-fluid">
     </picture>
+    <p>{{ .Description }}</p>
+    <p class="text-muted">Captured on {{ dateFormat "2006-01-02" .Params.PhotoDate }} and finished on {{ dateFormat "2006-01-02" .Date }}</p>
+    {{ if and .Site.Params.googleMapsApiKey .Params.PhotoLocation }}
+    {{ with safeURL (printf "zoom=4&center=%s&markers=color:gray|%s&key=%s" .Params.PhotoLocation .Params.PhotoLocation .Site.Params.googleMapsApiKey) }}
+    <picture>
+        <source srcset="https://maps.googleapis.com/maps/api/staticmap?size=640x200&{{ . }}" media="(min-width: 640px)">
+        <source srcset="https://maps.googleapis.com/maps/api/staticmap?size=425x200&{{ . }}" media="(min-width: 425px)">
+        <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?size=320x200&{{ . }}">
+    </picture>
+    {{ end }}
     {{ end }}
 </div>
 

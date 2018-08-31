@@ -10,11 +10,11 @@
 <!-- Ranges through content/post/*.md -->
 
 <div class="container">
-    <div class="card-group">
-    {{ range $page := .Pages }}
+    <div class="card-columns">
+    {{ range $page := .Pages.ByDate.Reverse }}
         {{ $photo := $page.Resources.GetMatch ($page.Params.Photo) }}
         {{ if ne $photo.ResourceType "image" }}{{ errorf "Image ResourceType not jpg: %s %s" .Path $photo.ResourceType }}{{ end }}
-        {{ $photo_resized := $photo.Fit "411x731" }}
+        {{ $photo_resized := $photo.Fit "425x500" }}
             <div class="card bg-secondary border-dark">
                 <a href="{{ $page.Permalink }}" class="text-white">
                     <img class="card-img-top" src="{{ $photo_resized.Permalink }}" alt="Card image cap">
