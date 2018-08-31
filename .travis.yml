@@ -30,8 +30,8 @@ before_install:
       rm -r "${HOME}/docker";
     fi
   - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --cache-from=hugo-base:latest --tag hugo-base --target base .travis
-  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --cache-from=hugo-builder:latest --tag hugo-builder --target builder .travis
-  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --cache-from=hugo:latest --tag hugo .travis
+  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --cache-from=hugo-base:latest --cache-from=hugo-builder:latest --tag hugo-builder --target builder .travis
+  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --cache-from=hugo-base:latest --cache-from=hugo-builder:latest --cache-from=hugo:latest --tag hugo .travis
   # Install AWS CLI
   - pip install --user --upgrade pip
   - pip install --user --upgrade awscli
