@@ -12,7 +12,8 @@
         <source srcset="{{ $photo_resized_1024.Permalink }}" media="(min-width: 640px)">
         <img src="{{ $photo_resized_425.Permalink }}" alt="{{ .Description }}" class="img-fluid">
     </picture>
-    <p>{{ .Description }}</p>
+    <p class="lead">{{ .Description }}</p>
+    {{ .Content }}
     <p class="text-muted">Captured on {{ dateFormat "2006-01-02" .Params.PhotoDate }} and finished on {{ dateFormat "2006-01-02" .Date }}</p>
     {{ if and .Site.Params.googleMapsApiKey .Params.PhotoLocation }}
     {{ with safeURL (printf "zoom=4&center=%s&markers=color:gray|%s&key=%s" .Params.PhotoLocation .Params.PhotoLocation .Site.Params.googleMapsApiKey) }}
@@ -24,7 +25,5 @@
     {{ end }}
     {{ end }}
 </div>
-
-{{ .Content }}
 {{ "<!-- End photography main -->" | safeHTML }}
 {{ end }}
