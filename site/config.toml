@@ -17,7 +17,7 @@ sectionPagesMenu = "main"
     # The path must be relative to the static folder 
     favicon = "favicon.ico"
 
-    SiteDescription = "The home of Guy Taylor aka TheBiggerGuy. A Software Eng working in Edinburgh."
+    SiteDescription = "The home of Guy Taylor aka TheBiggerGuy. A Software Engineer working in Edinburgh."
 
     googleMapsApiKey = "AIzaSyDs8gYGyCWfnn1bxWwZqQL3OXgkdRNOnUA"
 
