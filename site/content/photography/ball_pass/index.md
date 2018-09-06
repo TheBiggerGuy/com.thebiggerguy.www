@@ -3,11 +3,12 @@ title: "Ball Pass"
 description: "Alpine mountaineering course around Ball Pass, New Zealand"
 date: 2016-06-30T08:52:00+12:00
 
-photo: "GOPR4422-PANO.jpg"
-photoDate: 2016-06-30T08:52:00+12:00
-photoLocation: "-43.6368426,170.1671587"
-photoUrls:
-  - "https://photos.google.com/photo/AF1QipPamTI6gUR8QCAIKw6K-IgYuZr79kSUAiEi1nB"
+photos:
+  - file: "GOPR4422-PANO.jpg"
+    date: 2016-06-30T08:52:00+12:00
+    location: "-43.6368426,170.1671587"
+    urls:
+      - "https://photos.google.com/photo/AF1QipPamTI6gUR8QCAIKw6K-IgYuZr79kSUAiEi1nB"
 
 ---
 

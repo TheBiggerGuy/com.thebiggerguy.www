@@ -1,29 +1,57 @@
 {{ define "main" }}
 {{ "<!-- Start photography main -->" | safeHTML }}
 
-{{ $photo := .Resources.GetMatch (.Params.Photo) }}
-{{ if ne $photo.ResourceType "image" }}{{ errorf "Image ResourceType not jpg: %s %s" .Path $photo.ResourceType }}{{ end }}
-{{ $photo_resized_425 := $photo.Fit "425x500" }}
-{{ $photo_resized_1024 := $photo.Fit "1024x500" }}
-
 <h1>{{ .Title }}</h1>
 <div class="mx-auto">
-    <picture>
-        <source srcset="{{ $photo_resized_1024.Permalink }}" media="(min-width: 640px)">
-        <img src="{{ $photo_resized_425.Permalink }}" alt="{{ .Description }}" class="img-fluid">
-    </picture>
+
+    {{ range $photo := .Params.Photos }}
+
+        {{ with $photo_resource := $.Resources.GetMatch $photo.File }}
+            {{ if ne $photo_resource.ResourceType "image" }}{{ errorf "Image ResourceType not jpg: %s" $photo_resource.ResourceType }}{{ end }}
+            {{ $photo_resized_425 := $photo_resource.Fit "425x500" }}
+            {{ $photo_resized_1024 := $photo_resource.Fit "1024x500" }}
+            <picture>
+                <source srcset="{{ $photo_resized_1024.Permalink }}" media="(min-width: 640px)">
+                <img src="{{ $photo_resized_425.Permalink }}" alt="{{ $.Page.Description }}" class="img-fluid">
+            </picture>
+        {{ end }}
+
+        <p class="text-muted">Captured on {{ dateFormat "2006-01-02" $photo.Date }} and finished on {{ dateFormat "2006-01-02" $.Page.Date }}</p>
+
+    {{ end }}
     <p class="lead">{{ .Description }}</p>
+
     {{ .Content }}
-    <p class="text-muted">Captured on {{ dateFormat "2006-01-02" .Params.PhotoDate }} and finished on {{ dateFormat "2006-01-02" .Date }}</p>
-    {{ if and .Site.Params.googleMapsApiKey .Params.PhotoLocation }}
-    {{ with safeURL (printf "zoom=4&center=%s&markers=color:gray|%s&key=%s" .Params.PhotoLocation .Params.PhotoLocation .Site.Params.googleMapsApiKey) }}
-    <picture>
-        <source srcset="https://maps.googleapis.com/maps/api/staticmap?size=640x200&{{ . }}" media="(min-width: 640px)">
-        <source srcset="https://maps.googleapis.com/maps/api/staticmap?size=425x200&{{ . }}" media="(min-width: 425px)">
-        <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?size=320x200&{{ . }}">
-    </picture>
+
+    {{ $google_maps_markers_lat_long := (slice ) }}
+    {{ range $photo := .Params.Photos }}
+        {{ $google_maps_markers_lat_long = union $google_maps_markers_lat_long (slice $photo.location) }}
     {{ end }}
+    {{ $google_maps_markers_lat_long = sort (uniq $google_maps_markers_lat_long) }}
+
+    {{ if and $.Site.Params.googleMapsApiKey (gt (len $google_maps_markers_lat_long) 0) }}
+        {{ $first_location := index $google_maps_markers_lat_long 0 }}
+        {{ $last_location := index (last 1 $google_maps_markers_lat_long) 0 }}
+        {{ $other_locations := (slice) }}
+        {{ if gt (len $google_maps_markers_lat_long) 2 }}
+            {{ $other_locations = after 1 (sort (after 1 (sort $google_maps_markers_lat_long "" "desc"))) }}
+        {{ end }}
+
+        {{ $google_maps_link_url := printf "https://www.google.com/maps/search/?api=1&query=%s" $first_location }}
+        {{ if ne $first_location $last_location }}
+            {{ $google_maps_link_url = printf "https://www.google.com/maps/dir/?api=1&origin=%s&waypoints=%s&destination=%s&travelmode=walking" $first_location (delimit $other_locations "|") $last_location }}
+        {{ end }}
+        <a href="{{ safeURL $google_maps_link_url }}">
+            {{ with safeURL (printf "zoom=4&center=%s&markers=color:gray|%s&key=%s" $first_location (delimit $google_maps_markers_lat_long "|") $.Site.Params.googleMapsApiKey) }}
+                <picture>
+                    <source srcset="https://maps.googleapis.com/maps/api/staticmap?size=640x200&{{ . }}" media="(min-width: 640px)">
+                    <source srcset="https://maps.googleapis.com/maps/api/staticmap?size=425x200&{{ . }}" media="(min-width: 425px)">
+                    <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?size=320x200&{{ . }}" class="img-fluid">
+                </picture>
+            {{ end }}
+        </a>
     {{ end }}
+
 </div>
 {{ "<!-- End photography main -->" | safeHTML }}
 {{ end }}

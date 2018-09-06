@@ -15,18 +15,19 @@
         <h3>{{ .Key }}</h3>
         <div class="card-columns">
         {{ range $page := .Pages.ByDate.Reverse }}
-            {{ $photo := $page.Resources.GetMatch ($page.Params.Photo) }}
-            {{ if ne $photo.ResourceType "image" }}{{ errorf "Image ResourceType not jpg: %s %s" .Path $photo.ResourceType }}{{ end }}
-            {{ $photo_resized := $photo.Fit "425x500" }}
-                <div class="card bg-secondary border-dark">
-                    <a href="{{ $page.Permalink }}" class="text-white">
-                        <img class="card-img-top" src="{{ $photo_resized.Permalink }}" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $page.Title }}</h5>
-                            <p class="card-text">{{ $page.Description }}</p>
-                        </div>
-                    </a>
-                </div>
+            {{ $photo := index $page.Params.Photos 0 }}
+            {{ $photo_resource := $page.Resources.GetMatch $photo.file }}
+            {{ if ne $photo_resource.ResourceType "image" }}{{ errorf "Image ResourceType not jpg: %s %s" .Path $photo_resource.ResourceType }}{{ end }}
+            {{ $photo_resized := $photo_resource.Fit "425x500" }}
+            <div class="card bg-secondary border-dark">
+                <a href="{{ $page.Permalink }}" class="text-white">
+                    <img class="card-img-top" src="{{ $photo_resized.Permalink }}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $page.Title }}</h5>
+                        <p class="card-text">{{ $page.Description }}</p>
+                    </div>
+                </a>
+            </div>
         {{ end }}
         </div>
     </div>
