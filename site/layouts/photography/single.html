@@ -4,19 +4,40 @@
 <h1>{{ .Title }}</h1>
 <div class="mx-auto">
 
+    {{ $photo_id := -1 }}
     {{ range $photo := .Params.Photos }}
+        {{ $photo_id = add $photo_id 1 }}
 
         {{ with $photo_resource := $.Resources.GetMatch $photo.File }}
             {{ if ne $photo_resource.ResourceType "image" }}{{ errorf "Image ResourceType not jpg: %s" $photo_resource.ResourceType }}{{ end }}
             {{ $photo_resized_425 := $photo_resource.Fit "425x500" }}
             {{ $photo_resized_1024 := $photo_resource.Fit "1024x500" }}
-            <picture>
-                <source srcset="{{ $photo_resized_1024.Permalink }}" media="(min-width: 640px)">
-                <img src="{{ $photo_resized_425.Permalink }}" alt="{{ $.Page.Description }}" class="img-fluid">
-            </picture>
-        {{ end }}
+            {{ $photo_resized_1200 := $photo_resource.Fit "1200x768" }}
+            <a href="#" data-toggle="modal" data-target="#picture-modal-dialog-{{ $photo_id }}">
+                <picture>
+                    <source srcset="{{ $photo_resized_1024.Permalink }}" media="(min-width: 640px)">
+                    <img src="{{ $photo_resized_425.Permalink }}" alt="{{ $.Page.Description }}" class="img-fluid">
+                </picture>
+            </a>
+            <p class="text-muted">Captured on {{ dateFormat "2006-01-02" $photo.Date }} and finished on {{ dateFormat "2006-01-02" $.Page.Date }}</p>
 
-        <p class="text-muted">Captured on {{ dateFormat "2006-01-02" $photo.Date }} and finished on {{ dateFormat "2006-01-02" $.Page.Date }}</p>
+            <div id="picture-modal-dialog-{{ $photo_id }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">{{ $.Title }}</h5>
+                        </div>
+                        <div class="modal-body">
+                            <picture>
+                                <source srcset="{{ $photo_resized_1200.Permalink }}" media="(min-width: 1024px)">
+                                <source srcset="{{ $photo_resized_1024.Permalink }}" media="(min-width: 640px)">
+                                <img src="{{ $photo_resized_425.Permalink }}" alt="{{ $.Page.Description }}" class="img-fluid">
+                            </picture>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{ end }}
 
     {{ end }}
     <p class="lead">{{ .Description }}</p>
