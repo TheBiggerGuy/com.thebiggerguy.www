@@ -3,13 +3,20 @@ baseURL = "https://www.thebiggerguy.com/"
 languageCode = "en-gb"
 
 title = "TheBiggerGuy | Guy Taylor"
-author = "Guy Taylor"
 copyright = "Guy Taylor"
 theme = ""
 
+[author]
+    displayName = "Guy Taylor"
+    [social]
+        twitter = "TheBiggerGuy"
+
 # https://gohugo.io/getting-started/configuration/
+## Enable git
 enableGitInfo = true
 enableRobotsTXT = true
+## Fail if "ref" or "relref" can not be resolved
+refLinksErrorLevel = "ERROR"
 
 sectionPagesMenu = "main"
 
