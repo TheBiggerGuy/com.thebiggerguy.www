@@ -5,7 +5,8 @@
 $body-bg:    color("gray-dark");
 $body-color: color("white"); /* TODO: Use color("gray-light") to tone down some areas */
 
-$border-color: color("gray");
+$border-color: gray("700");
+$hr-border-color: gray("500");
 
 /* Defaults: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default; */
 $font-family-sans-serif: Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;

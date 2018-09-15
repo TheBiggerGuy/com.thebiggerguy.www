@@ -12,7 +12,8 @@
 <div class="container">
     {{ range .Pages.GroupByDate "2006" }}
     <div class="row">
-        <h3>{{ .Key }}</h3>
+        <h3 class="mb-0">{{ .Key }}</h3>
+        <hr class="w-100 mt-0">
         <div class="card-columns">
         {{ range $page := .Pages.ByDate.Reverse }}
             {{ $photo := index $page.Params.Photos 0 }}
