@@ -42,3 +42,7 @@ sectionPagesMenu = "main"
         disable = true
     [privacy.youtube]
         disable = true
+
+[imaging]
+    resampleFilter = "Lanczos"
+    quality = 90
