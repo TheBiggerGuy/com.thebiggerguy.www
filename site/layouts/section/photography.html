@@ -17,7 +17,7 @@
             {{ if ne $photo_resource.ResourceType "image" }}{{ errorf "Image ResourceType not jpg: %s %s" .Path $photo_resource.ResourceType }}{{ end }}
             {{ $photo_resized := $photo_resource.Fit "425x500" }}
             <div class="card bg-secondary border-dark">
-                <a href="{{ $page.Permalink }}" class="text-white">
+                <a href="{{ $page.Permalink }}">
                     <img class="card-img-top" src="{{ $photo_resized.Permalink }}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{ $page.Title }}</h5>

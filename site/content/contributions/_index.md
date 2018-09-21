@@ -6,4 +6,4 @@ menu: "Main"
 
 ---
 
-An automated list of GitHub work can be found at my <a href="https://resume.github.io/?TheBiggerGuy" class="text-white">GitHub Resume</a>.
+An automated list of GitHub work can be found at my <a href="https://resume.github.io/?TheBiggerGuy">GitHub Resume</a>.

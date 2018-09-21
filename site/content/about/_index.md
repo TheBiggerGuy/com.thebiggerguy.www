@@ -35,7 +35,7 @@ hideDescription: true
         </div>
         <div class="media-body">
             <h3>Achievements</h3>
-            <p>Through my work at Amazon I gained a patent for <i>"Video advertisement customization by compositing"</i> <a href="https://patents.google.com/patent/US9894423B1/en" class="text-muted">#9894423B1</a></p>
+            <p>Through my work at Amazon I gained a patent for <i>"Video advertisement customization by compositing"</i> <a href="https://patents.google.com/patent/US9894423B1/en">#9894423B1</a></p>
         </div>
     </li>
 </ul>

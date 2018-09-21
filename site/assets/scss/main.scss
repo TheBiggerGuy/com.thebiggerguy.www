@@ -1,5 +1,5 @@
 @import "../../../bootstrap/scss/functions";
-@import "../../../bootstrap/scss/variables";
+@import "bootstrap-varibles.scss"; //@import "../../../bootstrap/scss/variables";
 @import "../../../bootstrap/scss/mixins";
 
 .hero .row {
@@ -33,42 +33,17 @@
   font-weight: $lead-font-weight;
 }
 
-/* Set default fonts */
-/** {
-    font-family: 'Roboto', sans-serif;
-}*/
-
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
 #main {
   padding-top: 3.5rem;
 }
 
-/*
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px
-) !default;
-$container-max-widths: (
-  sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 1140px
-) !default;
-$modal-lg:                          800px !default;
-$modal-md:                          500px !default;
-$modal-sm:                          300px !default;
-*/
-
-
-$modal-xl: 1200px !default;
-
-@include media-breakpoint-up(sm) {
-  .modal-xl { max-width: $modal-xl; }
+footer {
+  color: $text-muted !important;
+  a {
+    color: $text-muted !important;
+  }
 }
-
 
 .section-about {
   $media-width: 150px;

@@ -9,7 +9,7 @@
     <div class="card-columns">
     {{ range $page := .Pages }}
             <div class="card bg-secondary border-dark">
-                <a href="{{ $page.Permalink }}" class="text-white">
+                <a href="{{ $page.Permalink }}">
                     {{ if $page.Params.LogoIcon }}
                     <div class="card-img-top text-center pt-3">
                         <span class="{{ $page.Params.LogoIcon }} fa-8x">
