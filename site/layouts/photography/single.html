@@ -1,7 +1,13 @@
+{{ define "header" }}
+<header>
+    {{ if .Title}}{{ if not .Params.hideTitle }}<h1>{{ .Title }}</h1>{{ end }}{{ end }}
+    {{ if .Description }}{{ if .Params.showDescription }}<h2>{{ .Description }}</h2>{{ end }}{{ end }}
+</header>
+{{ end }}
+
 {{ define "main" }}
 {{ "<!-- Start photography main -->" | safeHTML }}
 
-<h1>{{ .Title }}</h1>
 <div class="mx-auto">
 
     {{ $photo_id := -1 }}

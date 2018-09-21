@@ -4,8 +4,10 @@ description: "About Guy Taylor"
 date: 2018-08-24T17:09:43+01:00
 menu: "Main"
 
----
+hideTitle: true
+hideDescription: true
 
+---
 
 <style type="text/css">
     #head-shot-container {
@@ -44,4 +46,3 @@ menu: "Main"
         <p>In tech I am interested in communications, security and anything that is actually interesting.</p>
     </div>
 </div>
-

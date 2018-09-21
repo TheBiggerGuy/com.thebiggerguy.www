@@ -41,7 +41,17 @@
         {{- block "hero" . }}{{- end }}
         {{ "<!-- end hero -->" | safeHTML }}
 
+
         <div class="container">
+            {{ "<!-- Start header -->" | safeHTML }}
+            {{- block "header" . }}
+            <header>
+                {{ if .Title}}{{ if not .Params.hideTitle }}<h1>{{ .Title }}</h1>{{ end }}{{ end }}
+                {{ if .Description }}{{ if not .Params.hideDescription }}<h2>{{ .Description }}</h2>{{ end }}{{ end }}
+            </header>
+            {{- end }}
+            {{ "<!-- End header -->" | safeHTML }}
+
             {{ "<!-- Start main -->" | safeHTML }}
             {{- block "main" . }}{{- end }}
             {{ "<!-- End main -->" | safeHTML }}
