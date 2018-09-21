@@ -16,6 +16,8 @@ refLinksErrorLevel = "ERROR"
 
 sectionPagesMenu = "main"
 
+googleAnalytics = "UA-126221439-1"
+
 [author]
     displayName = "Guy Taylor"
     [social]
@@ -34,7 +36,8 @@ sectionPagesMenu = "main"
     [privacy.disqus]
         disable = true
     [privacy.googleAnalytics]
-        disable = true
+        disable = false
+        AnonymizeIP = true
     [privacy.instagram]
         disable = true
     [privacy.twitter]
