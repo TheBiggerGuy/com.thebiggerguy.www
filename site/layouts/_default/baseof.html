@@ -45,7 +45,7 @@
         <div class="container section-{{ .Section }}">
             {{ "<!-- Start header -->" | safeHTML }}
             {{- block "header" . }}
-            <header>
+            <header class="mb-4">
                 {{ if .Title}}{{ if not .Params.hideTitle }}<h1>{{ .Title }}</h1>{{ end }}{{ end }}
                 {{ if .Description }}{{ if not .Params.hideDescription }}<h2>{{ .Description }}</h2>{{ end }}{{ end }}
             </header>
