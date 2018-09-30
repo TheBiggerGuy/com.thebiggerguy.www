@@ -11,11 +11,11 @@
             <div class="card bg-secondary border-dark">
                 <a href="{{ $page.Permalink }}">
                     {{ if $page.Params.LogoIcon }}
-                    <div class="card-img-top text-center pt-3">
+                    <div class="card-img-top text-center pt-4">
                         <span class="{{ $page.Params.LogoIcon }} fa-8x">
                     </div>
                     {{ else }}
-                    <div class="text-center pt-3">
+                    <div class="text-center pt-4">
                         <img class="card-img-top" style="max-height: 128px; max-width: 128px;" src="{{ $page.Params.Logo }}" alt="{{ $page.Title }} Icon">
                     </div>
                     {{ end }}
