@@ -1,14 +1,32 @@
 <!doctype html>
 <html lang="{{ $.Site.LanguageCode | default "en" }}">
 <head>
+    <!-- lang on html tag and other "meta" tags that sound be first and "change" rendering or other system like properties -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="{{ .Description | default .Site.Params.SiteDescription }}">
-    <meta name="author" content="{{ delimit .Site.Author ", " " and " }}">
-    {{ .Hugo.Generator }}
-    <link rel="canonical" href="{{ .Permalink }}">
+
+    <!-- Metatdata -->
 
     <title>{{ .Site.Title }}{{ with .Title }} | {{ . }}{{ end }}</title>
+    <meta name="description" content="{{ .Description | default .Site.Params.SiteDescription }}">
+    <meta name="author" content="{{ delimit .Site.Author ", " " and " }}">
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{ .Hugo.Generator }}
+
+    <!-- Open Graph data -->
+    <meta name="og:title" content="{{ .Site.Title }}{{ with .Title }} | {{ . }}{{ end }}">
+    <meta name="og:description" content="{{ .Description | default .Site.Params.SiteDescription }}">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:site" content="@TheBiggerGuy" />
+    <!-- use og:title for twitter:title -->
+    <!-- use og:description for twitter:description -->
+    {{- block "twitter_card" . }}
+    <meta name="twitter:card" content="summary">
+    {{ $hero_image := .Site.Home.Resources.GetMatch "index_hero.jpg" }}
+    {{ $hero_image_square := $hero_image.Fill "1024x1024" }}
+    <meta name="twitter:image" content="{{ $hero_image_square.Permalink }}" />
+    {{- end }}
 
     {{ "<!-- Fav Icon -->" | safeHTML }}
     {{- with resources.Get .Site.Params.favicon | resources.Fingerprint "sha256" }}
