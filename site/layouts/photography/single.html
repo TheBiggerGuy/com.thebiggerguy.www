@@ -68,7 +68,7 @@
         {{ if ne $first_location $last_location }}
             {{ $google_maps_link_url = printf "https://www.google.com/maps/dir/?api=1&origin=%s&waypoints=%s&destination=%s&travelmode=walking" $first_location (delimit $other_locations "|") $last_location }}
         {{ end }}
-        <a href="{{ safeURL $google_maps_link_url }}">
+        <a href="{{ safeURL $google_maps_link_url }}" target="_blank" rel="noopener">
             {{ with safeURL (printf "zoom=4&center=%s&markers=color:gray|%s&key=%s" $first_location (delimit $google_maps_markers_lat_long "|") $.Site.Params.googleMapsApiKey) }}
                 <picture>
                     <source srcset="https://maps.googleapis.com/maps/api/staticmap?size=640x200&{{ . }}" media="(min-width: 640px)">
