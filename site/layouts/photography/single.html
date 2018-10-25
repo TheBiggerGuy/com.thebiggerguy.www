@@ -52,14 +52,14 @@
 
     {{ $google_maps_markers_lat_long := (slice ) }}
     {{ range $photo := .Params.Photos }}
-        {{ $google_maps_markers_lat_long = union $google_maps_markers_lat_long (slice $photo.location) }}
+        {{ $google_maps_markers_lat_long = $google_maps_markers_lat_long | append $photo.location }}
     {{ end }}
     {{ $google_maps_markers_lat_long = sort (uniq $google_maps_markers_lat_long) }}
 
     {{ if and $.Site.Params.googleMapsApiKey (gt (len $google_maps_markers_lat_long) 0) }}
         {{ $first_location := index $google_maps_markers_lat_long 0 }}
         {{ $last_location := index (last 1 $google_maps_markers_lat_long) 0 }}
-        {{ $other_locations := (slice) }}
+        {{ $other_locations := (slice ) }}
         {{ if gt (len $google_maps_markers_lat_long) 2 }}
             {{ $other_locations = after 1 (sort (after 1 (sort $google_maps_markers_lat_long "" "desc"))) }}
         {{ end }}
