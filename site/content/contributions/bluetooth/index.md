@@ -13,3 +13,4 @@ I cleaned up error recovery and shutdown code to prevent the terminal from being
 
 * Project Homepage: https://github.com/caljorden/spectools
 * Upstream Commit: https://github.com/caljorden/spectools/commit/77e92aa8a588969635f87ea02bcadd47bb2d21f0
+* Additional Project: https://github.com/mchwalisz/smutools (https://github.com/mchwalisz/smutools/commit/77e92aa8a588969635f87ea02bcadd47bb2d21f0)

@@ -29,3 +29,12 @@ This is the primary Linux scanner software stack. I enabled support for the Cann
 * Ubuntu Bug: https://bugs.launchpad.net/ubuntu/+source/sane-backends/+bug/1540706
 * Upstream Bug: <s>https://alioth.debian.org/tracker/?func=detail&atid=410366&aid=315298&group_id=30186</s> <small>(Upstream bug-tracker moved to GitLab)</small>
 * Upstream Commit: https://gitlab.com/sane-project/backends/commit/e6b6ad9d4847e86aed8be0837a19bfada881f52d
+
+## Codecgraph
+
+Codecgraph is a tool to aid development of [HDA](https://en.m.wikipedia.org/wiki/Intel_High_Definition_Audio) audio systems.
+
+I added the Asus P6T motherboard.
+
+* Project Homepage: http://helllabs.org/codecgraph/
+* Upstream Commit: https://github.com/cmatsuoka/codecgraph/commit/8358e2c81490b88b880af659fb4d3a312ec3e2b5
