@@ -3,7 +3,7 @@ title: "Webdev"
 description: "Anything \"webby\""
 date: 2018-08-27T14:08:22+01:00
 
-logo: https://www.w3.org/html/logo/badge/html5-badge-h-solo.png
+logoicon: "fab fa-html5"
 
 ---
 
