@@ -1,20 +1,10 @@
-# See https://github.com/JLLeitschuh/shuffleboard/commit/445eabb6234f7973351acfb492123484491e2008 for Docker cache
-
-sudo: required
+sudo: false
 dist: xenial
 language: generic
 
 branches:
   except:
     - gh-pages
-
-services:
-  - docker
-
-addons:
-  apt:
-    packages:
-      - docker-ce
 
 env:
   global:
@@ -24,15 +14,8 @@ env:
 before_install:
   # Set to fail on errors
   - set -o errexit && set -o pipefail
-  # Build docker container
-  - if [[ -d ${HOME}/docker ]]; then
-      find "${HOME}/docker" -name '*.tar.gz' -print0 | xargs -0 --no-run-if-empty -I {file} sh -c "zcat {file} | docker load";
-      rm -r "${HOME}/docker";
-    fi
-  - docker pull debian:buster-slim
-  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --cache-from=hugo-base:latest --tag hugo-base --target base .travis
-  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --cache-from=hugo-base:latest --cache-from=hugo-builder:latest --tag hugo-builder --target builder .travis
-  - docker build --build-arg=HUGO_VERSION --build-arg=HUGO_HASH --label=cache-travis=true --cache-from=hugo-base:latest --cache-from=hugo-builder:latest --cache-from=hugo:latest --tag hugo .travis
+  # Install Hugo
+  - .travis/install_hugo.sh
   # Install AWS CLI
   - pip install --user --upgrade pip
   - pip install --user --upgrade awscli
@@ -45,14 +28,13 @@ jobs:
     # Build site to test it works
     - stage: Test
       script:
-        - docker run -v "${PWD}:/repo" hugo
+        - hugo -s site
 
     # Add archive of site to GitHub via releases
     - stage: Archive
       if: branch = master
       script:
-        - docker run -v "${PWD}:/repo" hugo
-        - sudo chown -R travis:travis site/public
+        - hugo -s site
       before_deploy:
         - tar -czvf public.tar.gz site/public
       deploy:
@@ -65,8 +47,7 @@ jobs:
     - stage: Deploy
       if: branch = master
       script:
-        - docker run -v "${PWD}:/repo" hugo
-        - sudo chown -R travis:travis site/public
+        - hugo -s site
       deploy:
         provider: s3
         access_key_id: "${AWS_ACCESS_KEY_ID}"
@@ -79,18 +60,7 @@ jobs:
       after_deploy:
         - aws cloudfront create-invalidation --distribution-id "${AWS_CLOUDFRONT_DISTRIBUTION_ID}" --paths '/*'
 
-before_cache:
-  # Cache Docker files
-  - mkdir -p "${HOME}/docker"
-  - echo 'Docker images with cache-travis=true' && docker images --all --filter='dangling=false' --filter='label=cache-travis=true' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
-  - echo 'Docker images in cache' && find "${HOME}/docker/" -name '*.tar.gz'
-  - >
-    docker images --all --filter='dangling=false' --filter='label=cache-travis=true' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
-    | xargs --max-args=2 --verbose sh -c 'test -e "${HOME}/docker/${1}.tar.gz" || docker save "${0}" | gzip -2 > "${HOME}/docker/${1}.tar.gz"'
-  # Clean cached Docker files after 30 days
-  - find "${HOME}/docker" -type f -mtime +30 -exec rm {} \;
-
 cache:
   directories:
     - ${HOME}/.local
-    - ${HOME}/docker
+
