@@ -17,8 +17,8 @@ before_install:
   # Install Hugo
   - .travis/install_hugo.sh
   # Install AWS CLI
-  - pip install --user --upgrade pip
-  - pip install --user --upgrade awscli
+  - .travis/install_awscli.sh
+  # Export new tools to PATH
   - export PATH="${HOME}/.local/bin:${PATH}"
   # Reset shell
   - set +o errexit && set +o pipefail
