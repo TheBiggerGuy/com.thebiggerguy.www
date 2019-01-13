@@ -1,10 +1,13 @@
-sudo: false
+# Build, test and deploy website via Travis
+
+os: linux
 dist: xenial
 language: generic
 
 branches:
   except:
     - gh-pages
+    - /^untagged/
 
 env:
   global:
