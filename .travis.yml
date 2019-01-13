@@ -32,7 +32,7 @@ jobs:
 
     # Add archive of site to GitHub via releases
     - stage: Archive
-      if: branch = master
+      if: branch = master AND type != pull_request
       script:
         - hugo -s site
       before_deploy:
@@ -45,7 +45,7 @@ jobs:
 
     # Upload to S3 for public CDN
     - stage: Deploy
-      if: branch = master
+      if: branch = master AND type != pull_request
       script:
         - hugo -s site
       deploy:
