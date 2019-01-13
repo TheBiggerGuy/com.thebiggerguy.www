@@ -1,7 +1,7 @@
 # See https://github.com/JLLeitschuh/shuffleboard/commit/445eabb6234f7973351acfb492123484491e2008 for Docker cache
 
 sudo: required
-dist: trusty
+dist: xenial
 language: generic
 
 branches:
