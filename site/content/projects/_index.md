@@ -23,7 +23,7 @@ Docker containers for the Raspberry Pi to read and submit ADS-B data to multiple
 https://github.com/TheBiggerGuy/docker-ads-b
 
 
-Restful Sunsaver
+Restful SunSaver
 ----------------
 A REST web API to the [SunSaver MPPT](https://www.morningstarcorp.com/products/sunsaver-mppt/) solar charge controller.
 
