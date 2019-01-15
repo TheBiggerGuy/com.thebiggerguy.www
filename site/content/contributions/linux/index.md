@@ -16,7 +16,7 @@ This is an out-of-tree driver for the rtl8812AU_8821AU Realtek WiFi chip.
 
 ## libATASmart
 
-This is a libary to read hard disk [S.M.A.R.T](http://en.wikipedia.org/wiki/S.M.A.R.T.) data. I added support to read two additional pieces of information.
+This is a library to read hard disk [S.M.A.R.T](http://en.wikipedia.org/wiki/S.M.A.R.T.) data. I added support to read two additional pieces of information.
 
 * Ubuntu Bug: https://bugs.launchpad.net/ubuntu/+source/gnome-disk-utility/+bug/521864]
 * Upstream Commit: http://git.0pointer.net/libatasmart.git/commit/?id=2cc510293bd7dd120e1f5a24747924ec3630aba3

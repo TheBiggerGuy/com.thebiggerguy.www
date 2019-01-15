@@ -7,7 +7,7 @@ logoicon: "fab fa-bluetooth"
 
 ---
 
-## Kismet's SpecTools
+## Kismet's Spectools
 
 I cleaned up error recovery and shutdown code to prevent the terminal from being left in an unusable state. I also added a pause feature that I found useful when working on the code.
 

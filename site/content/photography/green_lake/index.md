@@ -12,4 +12,4 @@ photos:
 
 ---
 
-This was a photo taken from [Green Lake Hut](https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/huts/green-lake-hut/) out over Green Lake. This was during a walk along the [Green Lake Track](https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/green-lake-track/) from Lake Monowa to [Clark Hut](https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/huts/clark-hut-a-frame/) and back.
+This was a photo taken from [Green Lake Hut](https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/huts/green-lake-hut/) out over Green Lake. This was during a walk along the [Green Lake Track](https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/tracks/green-lake-track/) from Lake Monowai to [Clark Hut](https://www.doc.govt.nz/parks-and-recreation/places-to-go/fiordland/places/fiordland-national-park/things-to-do/huts/clark-hut-a-frame/) and back.

@@ -7,7 +7,7 @@ logoicon: "fab fa-html5"
 
 ---
 
-## Astorides
+## Asteroids
 
 https://github.com/erkie/erkie.github.com/commit/b7ccf591eaaa1705098acb1b72de81ef7103d177
 
@@ -20,6 +20,6 @@ https://github.com/mikelbring/tinyissue/commits?author=TheBiggerGuy
 [MediaWiki](https://www.mediawiki.org/wiki/MediaWiki) is the Wiki engine that backs [Wikipedia](https://www.wikipedia.org/). I added several extensions to MediaWiki to allow users to embed there instant messaging addresses along with there online status. These later got used by [Yellowikis](https://en.wikipedia.org/wiki/Yellowikis) to help business add there contact details and enable direct VOIP messaging (mainly via Skype).
 
 * Skype: https://www.mediawiki.org/w/index.php?title=Extension:Skype&oldid=145306
-* LastFM: https://www.mediawiki.org/w/index.php?title=Extension:LastFm&oldid=103165
+* Last.fm: https://www.mediawiki.org/w/index.php?title=Extension:LastFm&oldid=103165
 * Yahoo: https://www.mediawiki.org/w/index.php?title=Extension:Yahoo&oldid=59420
 * Jabber: https://www.mediawiki.org/w/index.php?title=Extension:Jabber&oldid=59458
