@@ -4,6 +4,12 @@ os: linux
 dist: xenial
 language: generic
 
+addons:
+  apt:
+    packages:
+      - aspell
+      - aspell-en
+
 branches:
   except:
     - gh-pages
@@ -31,7 +37,14 @@ jobs:
     # Build site to test it works
     - stage: Test
       script:
+        # Set to fail on errors
+        - set -o errexit && set -o pipefail
+        # Test the site builds
         - hugo -s site
+        # Spell Check
+        - for f in site/public/**/*.html; do echo "Spelling check ${f}..."; aspell --lang='en_GB' --home-dir="$(pwd)" --mode='html' pipe < $f | grep [^*]; echo "... done"; done
+        # Reset shell
+        - set +o errexit && set +o pipefail
 
     # Add archive of site to GitHub via releases
     - stage: Archive
