@@ -42,7 +42,7 @@ jobs:
         # Test the site builds
         - hugo -s site
         # Spell Check
-        - find site/public -type f -name "*.html" -print0 | xargs -0 -I{} sh -c 'echo "Spelling check {}..."; aspell --lang='en_GB' --home-dir="$(pwd)" --mode='html' --add-html-skip="githash" pipe < "{}" | grep [^*]; echo "... done"'
+        - find site/public -type f -name "*.html" -print0 | xargs -0 -I{} .travis/spell_check.sh "{}"
         # Reset shell
         - set +o errexit && set +o pipefail
 
