@@ -8,6 +8,7 @@ addons:
   apt:
     packages:
       - hunspell
+      - language-pack-en
 
 branches:
   except:
@@ -28,8 +29,12 @@ before_install:
   - .travis/install_awscli.sh
   # Export new tools to PATH
   - export PATH="${HOME}/.local/bin:${PATH}"
-  # Export dictionaries
+  # Export dictionaries and lang
   - export DICPATH="$(pwd)/libreoffice_dictionaries/en"
+  - locale
+  - locale -a
+  - sudo update-locale LANG='en_GB.UTF-8'
+  - locale
   # Log the versions
   - hugo version
   - aws --version
