@@ -7,8 +7,13 @@ language: generic
 addons:
   apt:
     packages:
-      - hunspell
       - language-pack-en
+      # For hunspell
+      - autoconf
+      - automake
+      - autopoint
+      - libtool
+      - g++
 
 branches:
   except:
@@ -27,19 +32,20 @@ before_install:
   - .travis/install_hugo.sh
   # Install AWS CLI
   - .travis/install_awscli.sh
+  # Install Hunspell
+  - .travis/install_hunspell.sh
   # Export new tools to PATH
   - export PATH="${HOME}/.local/bin:${PATH}"
+  - export LD_LIBRARY_PATH="${HOME}/.local/lib:${LD_LIBRARY_PATH}"
   # Export dictionaries and lang
   - export DICPATH="$(pwd)/libreoffice_dictionaries/en"
-  - locale
-  - locale -a
-  - sudo update-locale LANG='en_GB.UTF-8'
-  - locale
-  # Log the versions
+  - export DICTIONARY='en_GB'
+  - export WORDLIST="$(pwd)/.hunspell_default"
+  # Log the versions and paths
   - hugo version
   - aws --version
   - hunspell --version
-  - echo "" | hunspell -D
+  - hunspell -D -a /dev/null || true
   # Reset shell
   - set +o errexit && set +o pipefail
 
