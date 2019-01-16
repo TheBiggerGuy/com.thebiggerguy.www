@@ -28,6 +28,13 @@ before_install:
   - .travis/install_awscli.sh
   # Export new tools to PATH
   - export PATH="${HOME}/.local/bin:${PATH}"
+  # Export dictionaries
+  - export DICPATH="$(pwd)/libreoffice_dictionaries/en"
+  # Log the versions
+  - hugo version
+  - aws --version
+  - hunspell --version
+  - echo "" | hunspell -D
   # Reset shell
   - set +o errexit && set +o pipefail
 
