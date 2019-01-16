@@ -34,7 +34,7 @@ This is the primary Linux scanner software stack. I enabled support for the Cann
 
 Codecgraph is a tool to aid development of [HDA](https://en.m.wikipedia.org/wiki/Intel_High_Definition_Audio) audio systems.
 
-I added the Asus P6T motherboard.
+I added the ASUS P6T motherboard.
 
 * Project Homepage: http://helllabs.org/codecgraph/
 * Upstream Commit: https://github.com/cmatsuoka/codecgraph/commit/8358e2c81490b88b880af659fb4d3a312ec3e2b5

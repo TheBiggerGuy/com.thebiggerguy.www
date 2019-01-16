@@ -7,8 +7,13 @@ language: generic
 addons:
   apt:
     packages:
-      - aspell
-      - aspell-en
+      - language-pack-en
+      # For hunspell
+      - autoconf
+      - automake
+      - autopoint
+      - libtool
+      - g++
 
 branches:
   except:
@@ -27,8 +32,20 @@ before_install:
   - .travis/install_hugo.sh
   # Install AWS CLI
   - .travis/install_awscli.sh
+  # Install Hunspell
+  - .travis/install_hunspell.sh
   # Export new tools to PATH
   - export PATH="${HOME}/.local/bin:${PATH}"
+  - export LD_LIBRARY_PATH="${HOME}/.local/lib:${LD_LIBRARY_PATH}"
+  # Export dictionaries and lang
+  - export DICPATH="$(pwd)/libreoffice_dictionaries/en"
+  - export DICTIONARY='en_GB'
+  - export WORDLIST="$(pwd)/.hunspell_default"
+  # Log the versions and paths
+  - hugo version
+  - aws --version
+  - hunspell --version
+  - hunspell -D -a /dev/null || true
   # Reset shell
   - set +o errexit && set +o pipefail
 
@@ -42,6 +59,7 @@ jobs:
         # Test the site builds
         - hugo -s site
         # Spell Check
+        - git log --format="%H" >> .hunspell_default
         - find site/public -type f -name "*.html" -print0 | xargs -0 -I{} .travis/spell_check.sh "{}"
         # Reset shell
         - set +o errexit && set +o pipefail
