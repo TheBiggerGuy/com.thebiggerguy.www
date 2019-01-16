@@ -1,3 +1,6 @@
 [submodule "bootstrap"]
 	path = bootstrap
 	url = https://github.com/twbs/bootstrap.git
+[submodule "libreoffice_dictionaries"]
+	path = libreoffice_dictionaries
+	url = https://github.com/LibreOffice/dictionaries.git

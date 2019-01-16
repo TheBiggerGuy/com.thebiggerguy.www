@@ -9,7 +9,7 @@ logoicon: "fas fa-headphones"
 
 ## TagLib\#
 
-TagLib\# is a media format meta data parser. It is wired into audio players to read artist, album, etc. to organise users audio and video collections.
+TagLib\# is a media format meta data parser. It is wired into audio players to read artist, album and other information to organise users audio and video collections.
 
 I added support for reading the Audible AA file format meta data. This allowed the Banshee music player to manage audio books on mobile MP3 players. This format had never previously been documented so it required reverse engineering the binary file format.
 

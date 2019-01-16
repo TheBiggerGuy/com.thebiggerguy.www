@@ -7,8 +7,7 @@ language: generic
 addons:
   apt:
     packages:
-      - aspell
-      - aspell-en
+      - hunspell
 
 branches:
   except:
@@ -42,6 +41,7 @@ jobs:
         # Test the site builds
         - hugo -s site
         # Spell Check
+        - git log --format="%H" >> .hunspell_default
         - find site/public -type f -name "*.html" -print0 | xargs -0 -I{} .travis/spell_check.sh "{}"
         # Reset shell
         - set +o errexit && set +o pipefail
