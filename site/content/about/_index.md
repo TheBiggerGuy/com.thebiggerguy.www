@@ -26,7 +26,7 @@ hideDescription: true
         <div class="media-body">
             <h3>Software Engineering</h3>
             <p class="lead">As a full stack Software Developer at Amazon I worked daily on low latency and high transaction global services.</p>
-            <p>Focusing my work in the <i>Dynamic Advertising</i> team I help design and run multi terabyte analytic and machine learning systems along with the low latency hight throughput <i>Real Time Bidding</i> services.</p>
+            <p>Focusing my work in the <i>Dynamic Advertising</i> team I help design and run multi-terabyte analytic and machine learning systems along with the low latency high throughput <i>Real Time Bidding</i> services.</p>
         </div>
     </li>
     <li class="media">

@@ -1,5 +1,5 @@
 ---
-title: "Sunsetting The Festival"
+title: "Sun Setting The Festival"
 description: "A sunset mid Edinburgh festival"
 date: 2018-09-13T15:28:00+01:00
 
