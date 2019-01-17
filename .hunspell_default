@@ -37,6 +37,8 @@ libATASmart
 rtl8812AU
 8821AU
 F120
+OSX
+Gists
 
 WiFi
 HDA
@@ -44,6 +46,8 @@ MPPT
 ADSB
 HTTPS
 Modbus
+POSIX
+resx
 
 Webdev
 webby
