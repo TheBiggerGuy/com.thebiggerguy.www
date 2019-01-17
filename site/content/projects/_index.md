@@ -8,6 +8,14 @@ hideTitle: true
 
 ---
 
+My GitHub Gists
+---------------
+Find my helpful one off scripts including:
+
+* [Fix Windows vs. Linux/OSX/POSIX case sensitive filename issues with Microsoft .NET resource files (resx)](https://gist.github.com/TheBiggerGuy/b6222bd4784b264dbd00411a654f537c)
+
+https://gist.github.com/TheBiggerGuy
+
 
 Photo Oxide
 -----------
