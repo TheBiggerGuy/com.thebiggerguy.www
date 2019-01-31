@@ -1,2 +1,6 @@
+# Local bin/cache
+.local
+
+# Build site
 site/public
 site/resources
