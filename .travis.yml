@@ -29,7 +29,7 @@ before_install:
   # Set to fail on errors
   - set -o errexit && set -o pipefail
   # Install Hugo
-  - .travis/install_hugo.sh
+  - .travis/install_hugo.sh "${HOME}/.local"
   # Install AWS CLI
   - .travis/install_awscli.sh
   # Install Hunspell
