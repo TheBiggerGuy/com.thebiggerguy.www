@@ -6,5 +6,5 @@ Install Hugo via the instructions at https://gohugo.io/getting-started/installin
 
 ```bash
 cd site
-hugo
+../local-hugo server
 ```
