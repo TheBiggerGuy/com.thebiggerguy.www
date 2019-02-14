@@ -2,8 +2,7 @@
 [![Build Status](https://travis-ci.org/TheBiggerGuy/com.thebiggerguy.www.svg?branch=master)](https://travis-ci.org/TheBiggerGuy/com.thebiggerguy.www)
 
 ## Running locally
-Install Hugo via the instructions at https://gohugo.io/getting-started/installing/ and then simply run it.
-
+Running via the `local-hugo` script will set everything up and ensure you are using the same version of Hugo as defined in `.travis.yml`.
 ```bash
 cd site
 ../local-hugo server
