@@ -31,6 +31,9 @@ hideDescription: true
             <p>
                 Outside of work I have a passion for the outdoors and photography. I find working with wildlife and getting into the wilderness a great antidote to the sometimes intangible aspects of software development.
             </p>
+            <p>
+                My full <abbr title="Curriculum vitae">CV</abbr>&sol;Résumé is available here: <a href="CV_Resume_Feb_2019.pdf" type="button" class="btn btn-secondary">Full CV</a>
+            </p>
         </div>
     </li>
     <li class="media">
