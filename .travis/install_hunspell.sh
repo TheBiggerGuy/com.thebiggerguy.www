@@ -9,6 +9,7 @@ cd hunspell
 if which hunspell > /dev/null ; then
   echo 'Hunspell already found on the system'
 
+  git fetch --tags
   GIT_VERSION="$(git describe --tags)"
   CACHED_VERSION="v$(hunspell --version | head --lines=1 | sed -E 's/.*Hunspell ([0-9]+.[0-9]+.[0-9]+).*/\1/g')"
 
@@ -19,6 +20,8 @@ if which hunspell > /dev/null ; then
   else
     echo "Cached/Installed version NOT equal to git version"
   fi
+else
+  echo 'No Hunspell found on the PATH'
 fi
 
 autoreconf -vfi
