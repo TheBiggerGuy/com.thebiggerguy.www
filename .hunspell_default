@@ -40,6 +40,7 @@ rtl8812AU
 F120
 OSX
 Gists
+libmodbus
 
 WiFi
 HDA
@@ -49,6 +50,7 @@ HTTPS
 Modbus
 POSIX
 resx
+OAuth
 
 Webdev
 webby
@@ -58,3 +60,6 @@ fm
 9894423B1
 2cc510293bd7dd120e1f5a24747924ec3630aba3
 backends
+rs
+apis
+oauth2
