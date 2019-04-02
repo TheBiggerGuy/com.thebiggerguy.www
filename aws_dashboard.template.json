@@ -1,0 +1,84 @@
+{
+    "start": "-P7D",
+    "widgets": [
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 6,
+            "width": 12,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/CloudFront", "TotalErrorRate", "Region", "Global", "DistributionId", "MAIN_ID", { "label": "Error rate", "period": 3600, "stat": "Sum", "yAxis": "left" } ],
+                    [ "AWS/CloudFront", "5xxErrorRate",   "Region", "Global", "DistributionId", "MAIN_ID", { "label": "5xx rate",   "period": 3600, "stat": "Sum", "yAxis": "left" } ],
+                    [ "AWS/CloudFront", "4xxErrorRate",   "Region", "Global", "DistributionId", "MAIN_ID", { "label": "4xx rate",   "period": 3600, "stat": "Sum", "yAxis": "left" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "title": "CloudFront Errors",
+                "yAxis": {
+                    "left": {
+                        "label": "Requests per hour"
+                    },
+                    "right": {
+                        "label": "Requests per hour"
+                    }
+                },
+                "liveData": false
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 0,
+            "width": 24,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/CloudFront", "Requests", "Region", "Global", "DistributionId", "MAIN_ID",     { "label": "Requests (web)",      "period": 3600, "stat": "Sum", "yAxis": "left"  } ],
+                    [ "AWS/CloudFront", "Requests", "Region", "Global", "DistributionId", "REDIRECT_ID", { "label": "Requests (redirect)", "period": 3600, "stat": "Sum", "yAxis": "right" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "title": "CloudFront Requests",
+                "yAxis": {
+                    "left": {
+                        "label": "Requests per hour"
+                    },
+                    "right": {
+                        "label": "Requests per hour"
+                    }
+                },
+                "liveData": false
+            }
+        },
+        {
+            "type": "metric",
+            "x": 12,
+            "y": 6,
+            "width": 12,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "AWS/CloudFront", "BytesDownloaded", "Region", "Global", "DistributionId", "MAIN_ID", { "label": "Downloaded", "period": 3600, "stat": "Sum", "yAxis": "left"  } ],
+                    [ "AWS/CloudFront", "BytesUploaded",   "Region", "Global", "DistributionId", "MAIN_ID", { "label": "Uploaded",   "period": 3600, "stat": "Sum", "yAxis": "right" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "title": "CloudFront Transfer",
+                "yAxis": {
+                    "left": {
+                        "label": "Bytes per hour"
+                    },
+                    "right": {
+                        "label": "Bytes per hour"
+                    }
+                },
+                "liveData": false
+            }
+        }
+    ]
+}
