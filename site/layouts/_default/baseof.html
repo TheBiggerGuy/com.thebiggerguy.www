@@ -11,6 +11,7 @@
     <meta name="description" content="{{ .Description | default .Site.Params.SiteDescription }}">
     <meta name="author" content="{{ delimit .Site.Author ", " " and " }}">
     <link rel="canonical" href="{{ .Permalink }}">
+    {{ hugo.Generator }}
 
     <!-- Open Graph data -->
     <meta name="og:title" content="{{ .Site.Title }}{{ with .Title }} | {{ . }}{{ end }}">
