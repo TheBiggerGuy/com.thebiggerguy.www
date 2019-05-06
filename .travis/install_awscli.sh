@@ -4,5 +4,5 @@ set -o verbose
 set -o errexit
 set -o pipefail
 
-pip install --user --upgrade pip
-pip install --user --upgrade awscli
+python3 -m pip install --user --upgrade pip
+python3 -m pip install --user --upgrade awscli
