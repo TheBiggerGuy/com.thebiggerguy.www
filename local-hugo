@@ -8,7 +8,7 @@ ROOT_DIR="$(git rev-parse --show-toplevel)"
 
 git submodule update --init --recursive
 
-eval "$(cd "${ROOT_DIR}" && python3 -c 'from yaml import load; [print("export {}".format(x)) for x in load(open(".travis.yml", "r"))["env"]["global"]]')"
+eval "$(cd "${ROOT_DIR}" && python3 -c 'import yaml; [print("export {}".format(x)) for x in yaml.load(open(".travis.yml", "r"), Loader=yaml.SafeLoader)["env"]["global"]]')"
 
 echo "HUGO_VERSION=${HUGO_VERSION}"
 echo "HUGO_HASH=${HUGO_HASH}"
