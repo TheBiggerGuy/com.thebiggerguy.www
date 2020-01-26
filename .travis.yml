@@ -24,8 +24,8 @@ branches:
 
 env:
   global:
-    - HUGO_VERSION=0.55.6
-    - HUGO_HASH=8962b8cdc0ca220da97293cea0bb1b31718cb4d99d0766be6865cb976b1c1805
+    - HUGO_VERSION=0.57.2
+    - HUGO_HASH=f4ce91d6909d489fe5461633f6b6bd689ed14c9e06b1b7af110024420aa8fd91
 
 before_install:
   # Set to fail on errors

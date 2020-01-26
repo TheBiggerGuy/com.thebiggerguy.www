@@ -14,8 +14,13 @@ echo "CACHE_DIR=${CACHE_DIR}"
 echo "CACHE_TAR=${CACHE_TAR}"
 
 mkdir -p "${CACHE_DIR}"
-curl -L --output "${CACHE_TAR}" --time-cond "${CACHE_TAR}" \
-	"https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz"
+declare -a curl_options
+curl_options+=( -L )
+curl_options+=( --output "${CACHE_TAR}" )
+if [ -f "${CACHE_TAR}" ]; then
+    curl_options+=( --time-cond "${CACHE_TAR}" )
+fi
+curl "${curl_options[@]}" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz"
 sha256sum "${CACHE_TAR}"
 echo "${HUGO_HASH}  ${CACHE_TAR}" | sha256sum -c
 tar -xvf "${CACHE_TAR}" 'hugo'
