@@ -1,8 +1,8 @@
 # Build, test and deploy website via Travis
 
 os: linux
-dist: xenial
-language: minimal
+dist: bionic
+language: shell
 
 addons:
   apt:
@@ -75,8 +75,10 @@ jobs:
         - tar -czvf public.tar.gz site/public
       deploy:
         provider: releases
-        api_key: "${GITHUB_TOKEN}"
+        token: "${GITHUB_TOKEN}"
         file: public.tar.gz
+        # Deprecated: Replace with "cleanup" when moving to V2 deployment
+        # https://docs.travis-ci.com/user/deployment-v2#cleaning-up-the-git-working-directory
         skip_cleanup: true
 
     # Upload to S3 for public CDN
@@ -86,9 +88,10 @@ jobs:
         - hugo -s site
       deploy:
         provider: script
-        script:
-          # Requires AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
-          - aws s3 sync 'site/public' 's3://com.thebiggerguy.www' --region='eu-west-1' --acl='private' --delete
+        # Requires AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+        script: aws s3 sync 'site/public' 's3://com.thebiggerguy.www' --region='eu-west-1' --acl='private' --delete
+        # Deprecated: Replace with "cleanup" when moving to V2 deployment
+        # https://docs.travis-ci.com/user/deployment-v2#cleaning-up-the-git-working-directory
         skip_cleanup: true
       after_deploy:
         - aws cloudfront create-invalidation --distribution-id "${AWS_CLOUDFRONT_DISTRIBUTION_ID}" --paths '/*'
