@@ -41,6 +41,9 @@ hideDescription: true
         <div class="media-body">
             <h3>Software Engineering</h3>
             <p>
+                At <b>NCTech</b> I worked on the <a href="https://vr.world">VR.World</a> service. This is an integrated service that provides owners of 360&deg; cameras automated uploading, processing and distribution of the images/videos. Integrating directly with Google Street View the service scales to handle high quality imagery of the whole world, daily processing data from a fleet of vehicles.
+            </p>
+            <p>
                 At <b>Amazon</b> I primarily worked on the Dynamic Advertising program. This team serves millions of personalized adverts to Amazon customers worldwide, buying impressions in real time auctions and algorithmically delivering the most relevant advert at the correct price. This involved working on large scale, low latency services connected to multi terabyte machine learning and analytics platforms.
             </p>
             <p>
