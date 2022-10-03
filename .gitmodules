@@ -1,5 +1,0 @@
-[submodule "bootstrap"]
-	path = bootstrap
-	url = https://github.com/twbs/bootstrap.git
-	shallow = true
-
