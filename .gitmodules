@@ -2,12 +2,4 @@
 	path = bootstrap
 	url = https://github.com/twbs/bootstrap.git
 	shallow = true
-[submodule "libreoffice_dictionaries"]
-	path = libreoffice_dictionaries
-	url = https://github.com/LibreOffice/dictionaries.git
-	shallow = true
-[submodule "hunspell"]
-	path = hunspell
-	url = https://github.com/hunspell/hunspell.git
-	shallow = true
 
