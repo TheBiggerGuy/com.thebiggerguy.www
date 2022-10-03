@@ -49,32 +49,6 @@ footer {
   $media-width: 150px;
   $media-height: 150px;
 
-  #head-shot-container img {
-      transition: opacity 1s ease;
-  }
-
-  #head-shot {
-      opacity: 1;
-      z-index: 0;
-  }
-
-  #head-shot-hover {
-      opacity: 0;
-      z-index: 1;
-      position: relative;
-      top: -$media-height;
-  }
-
-  #head-shot-container:hover {
-    #head-shot {
-      opacity: 0;
-    }
-
-    #head-shot-hover {
-      opacity: 1;
-    }
-  }
-
   .media-token-img {
     /* flex: none; */
     width: $media-width;
