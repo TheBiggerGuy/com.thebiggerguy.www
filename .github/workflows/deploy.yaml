@@ -82,6 +82,9 @@ jobs:
     needs: archive
     runs-on: ubuntu-20.04
     environment: Deployment
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - name: Checkout repository and submodules
@@ -95,11 +98,14 @@ jobs:
           path: ~/.local
           key: ${{ runner.os }}-${{ hashFiles('.ci/*.sh') }}
 
-      # TODO: Move to https://github.com/aws-actions/configure-aws-credentials
+      - name: Assume AWS Role from OIDC
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE }}
+          aws-region: eu-west-1
+
       - name: Deploy
         run: ./.ci/deploy.sh
         shell: bash
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
