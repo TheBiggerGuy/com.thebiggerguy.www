@@ -8,3 +8,6 @@ site/resources
 # IDEs
 *.sublime-workspace
 *.sublime-project
+
+# Hugo
+*.hugo_build.lock
