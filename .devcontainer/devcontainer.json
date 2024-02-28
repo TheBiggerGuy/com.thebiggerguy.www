@@ -1,0 +1,15 @@
+{
+	"name": "Hugo and Tools",
+	"image": "mcr.microsoft.com/devcontainers/base:debian-12",
+	"features": {
+		"ghcr.io/devcontainers/features/go:1": {
+			"version": "1.21"
+		},
+		"ghcr.io/devcontainers/features/node:1": {
+			"nodeGypDependencies": true,
+			"version": "18",
+			"nvmVersion": "0.39"
+		}
+	},
+	"forwardPorts": [1313]
+}
