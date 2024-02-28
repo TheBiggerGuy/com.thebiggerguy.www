@@ -50,3 +50,17 @@ googleAnalytics = "UA-126221439-1"
 [imaging]
     resampleFilter = "Lanczos"
     quality = 90
+
+[markup]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[module]
+    [[module.imports]]
+        path = "github.com/twbs/bootstrap"
+    [[module.imports.mounts]]
+        source = 'scss'
+        target = 'assets/scss/bootstrap'
+    [[module.imports.mounts]]
+        source = 'js'
+        target = 'assets/js/bootstrap'
