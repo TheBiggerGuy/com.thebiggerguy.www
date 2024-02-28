@@ -21,7 +21,7 @@ googleAnalytics = "UA-126221439-1"
 [author]
     displayName = "Guy Taylor"
     [social]
-        twitter = "TheBiggerGuy"
+        mastodon = "https://infosec.exchange/@TheBiggerGuy"
 
 [params]
     # The path must be relative to the static folder 
