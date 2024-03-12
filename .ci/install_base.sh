@@ -10,6 +10,9 @@ sudo apt install -y \
     hunspell-en-gb \
     hunspell-en-us
 
-# For AWS CLI
+# For AWS CLI/CF Lint
 sudo apt install -y \
     python3-pip
+
+python3 -m pip install --user --upgrade pip
+python3 -m pip install --user --upgrade setuptools wheel pipx
