@@ -11,6 +11,7 @@ Parameters:
 Resources:
   Budget:
     Type: 'AWS::Budgets::Budget'
+    DeletionPolicy: Delete
     Properties:
       Budget:
         BudgetName: com-thebiggerguy-www
@@ -21,6 +22,41 @@ Resources:
         TimeUnit: MONTHLY
         CostTypes:
           IncludeTax: true
+
+  DataBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Delete
+    Properties:
+      BucketName: com.thebiggerguy.www
+      LoggingConfiguration:
+        DestinationBucketName: com.thebiggerguy.www-logging
+        LogFilePrefix: s3/
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: True
+        BlockPublicPolicy: True
+        IgnorePublicAcls: True
+        RestrictPublicBuckets: True
+      Tags:
+        - Key: project
+          Value: com-thebiggerguy-www
+
+  DataBucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    DeletionPolicy: Delete
+    Properties:
+      Bucket: !Ref DataBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Sid: "CloudFront Read"
+            Effect: "Allow"
+            Principal:
+              AWS: "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E1YON6C0ZCCCYT"
+            Action: "s3:GetObject"
+            Resource: "arn:aws:s3:::com.thebiggerguy.www/*"
 
 Outputs:
   GitHash:
