@@ -29,7 +29,7 @@ Resources:
     Properties:
       BucketName: com.thebiggerguy.www
       LoggingConfiguration:
-        DestinationBucketName: com.thebiggerguy.www-logging
+        DestinationBucketName: !Ref LoggingBucket
         LogFilePrefix: s3/
       OwnershipControls:
         Rules:
@@ -57,6 +57,50 @@ Resources:
               AWS: "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E1YON6C0ZCCCYT"
             Action: "s3:GetObject"
             Resource: "arn:aws:s3:::com.thebiggerguy.www/*"
+
+  LoggingBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      BucketName: com.thebiggerguy.www-logging
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: True
+        BlockPublicPolicy: True
+        IgnorePublicAcls: True
+        RestrictPublicBuckets: True
+      Tags:
+        - Key: project
+          Value: com-thebiggerguy-www
+
+  LoggingBucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    DeletionPolicy: Delete
+    Properties:
+      Bucket: !Ref LoggingBucket
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Action:
+              - 's3:PutObject'
+            Effect: Allow
+            Principal:
+              Service: logging.s3.amazonaws.com
+            Resource: !Join 
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref LoggingBucket
+                - /*
+            Condition:
+              ArnLike:
+                'aws:SourceArn': !GetAtt 
+                  - DataBucket
+                  - Arn
+              StringEquals:
+                'aws:SourceAccount': !Sub '${AWS::AccountId}'
 
 Outputs:
   GitHash:
