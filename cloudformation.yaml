@@ -1,4 +1,7 @@
+---
 AWSTemplateFormatVersion: 2010-09-09
+
+Description: "Infrastructure for www.thebiggerguy.com"
 
 Parameters:
   GitHash:

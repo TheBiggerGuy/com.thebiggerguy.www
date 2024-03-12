@@ -22,6 +22,10 @@ hunspell -D -a /dev/null || true
 
 # Test the site builds
 hugo -s site
+
 # Spell Check
 git log --format="%H" >> .hunspell_default
 find site/public -type f -name "*.html" -print0 | xargs -0 -I{} .ci/spell_check.sh "{}"
+
+# Lint CF template
+.ci/lint_cf.sh

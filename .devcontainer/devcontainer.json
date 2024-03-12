@@ -9,7 +9,21 @@
 			"nodeGypDependencies": true,
 			"version": "18",
 			"nvmVersion": "0.39"
+		},
+		"ghcr.io/devcontainers/features/python:1": {
+			"version": "os-provided",
+			"installTools": true,
+			"toolsToInstall": "pipx,cfn-lint"
 		}
 	},
-	"forwardPorts": [1313]
+	"forwardPorts": [1313],
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"extensions": [
+					"kddejong.vscode-cfn-lint"
+				]
+			}
+		}
+	}
 }
