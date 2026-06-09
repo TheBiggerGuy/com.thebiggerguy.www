@@ -66,7 +66,7 @@ Resources:
       BucketName: com.thebiggerguy.www-logging
       OwnershipControls:
         Rules:
-          - ObjectOwnership: BucketOwnerEnforced
+          - ObjectOwnership: ObjectWriter # Required for CloudFront logging
       PublicAccessBlockConfiguration:
         BlockPublicAcls: True
         BlockPublicPolicy: True
@@ -101,6 +101,61 @@ Resources:
                   - Arn
               StringEquals:
                 'aws:SourceAccount': !Sub '${AWS::AccountId}'
+
+  CloudFrontMain:
+    Type: AWS::CloudFront::Distribution
+    DeletionPolicy: Delete
+    Properties:
+      DistributionConfig: 
+        CNAMEs:
+          - www.thebiggerguy.com
+        Comment: www.TheBiggerGuy.com
+        DefaultCacheBehavior:
+          AllowedMethods:
+            - GET
+            - HEAD
+          Compress: True
+          ForwardedValues:
+            Cookies:
+                 Forward: none
+            Headers: []
+            QueryString: False
+          ViewerProtocolPolicy: redirect-to-https
+          TargetOriginId: S3-com.thebiggerguy.www
+          LambdaFunctionAssociations:
+            - EventType: viewer-request
+              LambdaFunctionARN: arn:aws:lambda:us-east-1:337154450806:function:cloudfront_s3_index_redirect:6
+        DefaultRootObject: index.html
+        Enabled: True
+        Origins:
+          - Id: S3-com.thebiggerguy.www
+            DomainName: com.thebiggerguy.www.s3.eu-west-1.amazonaws.com
+            S3OriginConfig:
+              OriginAccessIdentity: origin-access-identity/cloudfront/E1YON6C0ZCCCYT
+        PriceClass: PriceClass_100
+        # Note:
+        # CloudFront is the only AWS service not to support S3 permssions using
+        # standard systems. As such manual actions are required.
+        # https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html
+        # https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html
+        Logging:
+          Bucket: !Join [ ".", [ !Ref LoggingBucket, "s3.amazonaws.com" ] ]
+          Prefix: cloudfront/
+          IncludeCookies: false
+        ViewerCertificate:
+          AcmCertificateArn: arn:aws:acm:us-east-1:337154450806:certificate/00c92b51-af3b-4761-a6b6-d0aafc796fb5
+          MinimumProtocolVersion: TLSv1.2_2021
+          SslSupportMethod: sni-only
+        IPV6Enabled: true
+        HttpVersion: http1.1
+        CustomErrorResponses:
+          - ErrorCode: 404
+            ResponseCode: 404
+            ResponsePagePath: /404.html
+      Tags:
+        - Key: project
+          Value: com-thebiggerguy-www
+
 
 Outputs:
   GitHash:
