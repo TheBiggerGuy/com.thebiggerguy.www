@@ -70,10 +70,25 @@
 
     {{ "<!-- Scripts -->" | safeHTML }}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha512-k2WPPrSgRFI6cTaHHhJdc8kAXaRM4JBFEDo1pPGGlYiOyv4vnA0Pp0G5XMYYxgAPmtmv/IIaQA6n5fLAyJaFMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/popper.min.js" integrity="sha512-eHo1pysFqNmmGhQ8DnYZfBVDlgFSbv3rxS0b/5+Eyvgem/xk0068cceD8GTlJOZsUrtjANIrFhhlwmsL1K3PKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    {{- with resources.Match "js/bootstrap/dist/*.js" | resources.Concat "js/bootstrap.js" | resources.Fingerprint "sha256" }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js" integrity="sha512-ubuT8Z88WxezgSqf3RLuNi5lmjstiJcyezx34yIU2gAHonIi27Na7atqzUZCOoY4CExaoFumzOsFQ2Ch+I/HCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{/* Bootstrap 4's dist modules must be concatenated with util.js first and popover.js after tooltip.js; resources.Match returns lexical order (util.js last, popover.js before tooltip.js), which throws and aborts the bundle. Reorder explicitly. */}}
+    {{- $util := slice }}
+    {{- $popover := slice }}
+    {{- $middle := slice }}
+    {{- range (resources.Match "js/bootstrap/dist/*.js") }}
+        {{- if eq (path.Base .Name) "util.js" }}{{ $util = $util | append . }}
+        {{- else if eq (path.Base .Name) "popover.js" }}{{ $popover = $popover | append . }}
+        {{- else }}{{ $middle = $middle | append . }}{{- end }}
+    {{- end }}
+    {{- with ($util | append $middle | append $popover) | resources.Concat "js/bootstrap.js" | resources.Fingerprint "sha256" }}
     <script src="{{ .Permalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{- end }}
+    {{/* Bootstrap 4.2.1 collapse.js feeds jQuery's null-prototype .data() object to RegExp.test on the first toggle, throwing "Cannot convert object to primitive value". Pre-initialising the instance makes later clicks take the string 'toggle' path. Fixed upstream in Bootstrap 4.3.1. */}}
+    <script>
+      jQuery(function ($) {
+        $('#navbar-collapse').collapse({ toggle: false });
+      });
+    </script>
     {{ template "_internal/google_analytics_async.html" . }}
 </body>
 </html>
