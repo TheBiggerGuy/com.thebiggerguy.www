@@ -1,6 +1,12 @@
 # Local bin/cache
 .local
 
+# Local working docs (not for the repo)
+local-docs/
+
+# Claude local instructions (personal, not for the repo)
+CLAUDE.local.md
+
 # Build site
 site/public
 site/resources
