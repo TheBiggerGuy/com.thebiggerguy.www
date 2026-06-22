@@ -7,8 +7,8 @@
 		},
 		"ghcr.io/devcontainers/features/node:2": {
 			"nodeGypDependencies": true,
-			"version": "18",
-			"nvmVersion": "0.39"
+			"version": "24",
+			"nvmVersion": "0.40.5"
 		},
 		"ghcr.io/devcontainers/features/python:1": {
 			"version": "os-provided",
@@ -19,11 +19,11 @@
 	"forwardPorts": [1313],
 	"customizations": {
 		"vscode": {
-			"settings": {
-				"extensions": [
-					"kddejong.vscode-cfn-lint"
-				]
-			}
+			"extensions": [
+				"kddejong.vscode-cfn-lint",
+				"streetsidesoftware.code-spell-checker",
+				"streetsidesoftware.code-spell-checker-british-english"
+			]
 		}
 	}
 }

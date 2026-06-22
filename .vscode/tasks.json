@@ -1,0 +1,53 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build",
+			"detail": "Build the Hugo site into site/public",
+			"type": "shell",
+			"command": "./local-hugo",
+			"args": ["-s", "site"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Test",
+			"detail": "Run the checks locally: Build, Spell, Lint CF ",
+			"dependsOn": ["Spell", "Lint CF"],
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Spell",
+			"detail": "Spell-check the built HTML with cspell ",
+			"type": "shell",
+			"command": "./.ci/spell_check.sh",
+			"dependsOn": "Build",
+			"group": "test",
+			"problemMatcher": []
+		},
+		{
+			"label": "Lint CF",
+			"detail": "Lint cloudformation.yaml with cfn-lint",
+			"type": "shell",
+			"command": "./.ci/lint_cf.sh",
+			"group": "test",
+			"problemMatcher": []
+		},
+		{
+			"label": "Serve",
+			"detail": "Run the Hugo dev server with live reload on :1313 (drafts enabled)",
+			"type": "shell",
+			"command": "./local-hugo",
+			"args": ["server", "-s", "site", "-D", "--bind", "0.0.0.0"],
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}
