@@ -9,7 +9,7 @@ set -o pipefail
 # Install Hugo
 .ci/install_hugo.sh "${HOME}/.local"
 # Install AWS CLI
-.ci/install_awscli.sh
+.ci/install_awscli.sh "${HOME}/.local"
 # Export new tools to PATH
 export PATH="${HOME}/.local/bin:${PATH}"
 export LD_LIBRARY_PATH="${HOME}/.local/lib:${LD_LIBRARY_PATH}"
