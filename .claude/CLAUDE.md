@@ -63,6 +63,31 @@ Goal: maximum supply-chain security. When writing/updating workflows:
 
 ## Spell checking
 
-`.ci/test.sh` builds the site then runs `.ci/spell_check.sh` over every HTML file
-using hunspell (`en_GB`, `DICPATH=/usr/share/hunspell`). The `.hunspell_default`
-file is the custom wordlist (git commit hashes are appended at test time).
+`.ci/test.sh` builds the site, then `.ci/spell_check.sh` runs **cspell** over
+`site/public/**/*.html`. The script invokes it with `npm exec` (not `npx` —
+deprecated), pulling `cspell` + `@cspell/dict-en-gb` at versions pinned in
+`.ci/versions.sh` (`CSPELL_VERSION`, `CSPELL_DICT_EN_GB_VERSION`); version-only,
+no SHA (npm verifies registry integrity). The npm download cache (`~/.npm`) is
+cached in CI alongside `~/.local`. Config is `.cspell.json` (`language: en-GB`).
+
+Non-obvious cspell behaviour (learned the hard way):
+- **`cspell --config <file>` MERGES with the auto-discovered `.cspell.json`, it
+  does not replace it.** Tests run with `--config` while a populated `cspell.json`
+  exists are contaminated — the repo words stay active. Test against the real
+  `cspell.json` (or a clean dir).
+- **Case-boundary splitting** (`allowCompoundWords` off by default): `FontAwesome`
+  → `Font`+`Awesome`, `GnuCash` → `Gnu`+`Cash` — accepted if every part is known,
+  so such compounds need no custom word. It will NOT accept arbitrary
+  concatenations (`helloworld`). A typo slips only if it splits into all-real
+  words (`InThe`); single-token misspellings are caught.
+- Custom words live in `project-words.txt` (a cspell text dictionary wired in via
+  `dictionaryDefinitions`/`dictionaries` in `.cspell.json`), grouped with `#`
+  comments — including transliterations for the Thai phrases (cspell DOES flag
+  non-Latin scripts). Inline `# comment` after a word works. It holds only what's
+  genuinely unknown: proper nouns (NZ/Danish/Thai place names), product names,
+  acronyms. Generic tech terms are covered by cspell's default bundled
+  dictionaries — no extra dict packages needed.
+- `ignoreRegExpList: ["CommitHash"]` skips the footer git SHA (`footer.html`
+  `.GitInfo.Hash`), replacing the old `git log >> .hunspell_default` hack. The
+  `integrity="…"` regex skips SRI base64 hashes (Hugo `resources.Fingerprint`),
+  which otherwise yield false positives like `Grcq`/`pqir`.
