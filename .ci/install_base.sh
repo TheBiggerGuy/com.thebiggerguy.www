@@ -10,7 +10,7 @@ sudo apt install -y \
     hunspell-en-gb \
     hunspell-en-us
 
-# For AWS CLI/CF Lint
+# For CF Lint
 sudo apt install -y \
     python3-pip
 
