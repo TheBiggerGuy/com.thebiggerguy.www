@@ -1,0 +1,44 @@
+# Custom project dictionary for www.thebiggerguy.com
+# One word per line; lines starting with '#' are comments (cspell text-dictionary format).
+# Holds only terms cspell's bundled dictionaries do not know — proper nouns,
+# product names, acronyms. Generic tech terms and camelCase compounds (FontAwesome,
+# GnuCash, TheBiggerGuy ...) are covered by cspell's defaults; see CLAUDE.md.
+
+# New Zealand place names (photography)
+Aoraki
+Catlins
+Fiordland
+Monowai
+Purakaunui
+Roys
+
+# Copenhagen / Danish places & breweries (photography)
+Baghaven
+Kongernes
+Lapidarium
+Mikkeller
+Torpedohallen
+
+# Thailand place names (photography) — Thai script with transliteration
+Chedi                          # Wat Chedi Luang (temple, Chiang Mai)
+Luang
+เชียงใหม่                          # Chiang Mai
+วัดเจดีย์หลวง                        # Wat Chedi Luang (temple)
+จุดชมทิวทัศน์หงอนนาค                  # Ngon Nak viewpoint (Krabi)
+เส้นทางศึกษาธรรมชาติเขาหางนาค          # Khao Hang Nak nature trail (Krabi)
+
+# Projects & products (contributions)
+Codecgraph
+libmodbus
+Realtek
+Spectools
+tinyissue
+Yellowikis
+
+# Acronyms & tech terms
+ADSB
+Gists
+Insta
+MPPT
+resx
+Webdev
